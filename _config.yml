@@ -2,7 +2,7 @@
 title: Subeen Jeon Here
 description: This is my dev log.
 url: hhttps://subeenjeonhere.github.io
-avatar: /avatar.jpeg
+avatar: /bmg.jpeg
 paginate: 5
 permalink: pretty
 cover_image: /bmg.jpeg
@@ -58,3 +58,9 @@ author:
   url: https://github.com/vszhub/
   email: tnqls1831@gmail.com
   location: Republic of Korea
+
+# Outputting
+permalink: /:categories/:title/
+paginate: 15                                    # Defaults : 5
+paginate_path: /page:num/
+timezone: # https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
