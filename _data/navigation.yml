@@ -1,4 +1,7 @@
+#화면 보여지는 영역
 - title: Blog
   url: /
 - title: About
   url: /about/
+- title: Categories
+  url: /categories/
