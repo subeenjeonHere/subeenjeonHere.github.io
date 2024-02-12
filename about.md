@@ -4,8 +4,7 @@ title: About
 ---
 
 
-🚀 
-### 
+🚀
 1. Java
 2. Spring
 3. Algorithms
