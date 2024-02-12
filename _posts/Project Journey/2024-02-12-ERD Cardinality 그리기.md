@@ -1,5 +1,5 @@
 ---
-title: ERD Cardinality 그리기 (4)
+title: ERD Cardinality 그리기
 date: 2024-02-12 09:28:00 +09:00
 categories: ProjectJourney
 tags:
