@@ -9,7 +9,7 @@ categories:
   - Database
   - Algorithms
   - CS
-  - Project Journey
+  - ProjectJourney
   - Web
   - Etc.
 ---
