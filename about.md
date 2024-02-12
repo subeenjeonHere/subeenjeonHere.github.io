@@ -5,6 +5,7 @@ title: About
 
 
 🚀
+###  Areas of focus
 1. Java
 2. Spring
 3. Algorithms
