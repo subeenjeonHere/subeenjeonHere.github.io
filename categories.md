@@ -8,7 +8,11 @@ categories:
   - Spring
   - Database
   - Algorithms
-  - CS
+  - CS:
+      - DataStructure
+      - Network
+      - OperatingSystem
+      - Web
   - ProjectJourney
   - Web
   - Etc.
