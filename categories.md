@@ -14,6 +14,7 @@ categories:
       - OperatingSystem
       - Web
       - SoftwareDev
+      - Etcetera
   - ProjectJourney
   - Web
   - Etc.
