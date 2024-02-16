@@ -851,7 +851,7 @@ class Solution {
 
 제곱을 사용해서 풀 수 있는 문제다.
 
-```jsx
+```java
 class Solution {
     public int solution(int n, int t) {
         int answer = 0;

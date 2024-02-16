@@ -38,7 +38,7 @@ tags:
 
 # ☺︎ MDS
 
-```jsx
+```java
 arr = [1, 1, 3, 3, 0, 1, 1] 이면 [1, 3, 0, 1] 을 return 합니다.
 arr = [4, 4, 4, 3, 3] 이면 [4, 3] 을 return 합니다.
 
@@ -55,7 +55,7 @@ arr = [4, 4, 4, 3, 3] 이면 [4, 3] 을 return 합니다.
 > 성공
 >
 
-```jsx
+```java
 import java.util.*;
 
 public class Solution {

@@ -99,196 +99,118 @@ top
 > 콘솔에 출력이 되지 않음
 >
 
-```jsx
-public
+```java
+public class Main {
+    public static void main(String[] args) throws IOException {
+        Stack<Integer> stk = new Stack<>();
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int n = Integer.parseInt(br.readLine());
 
-class Main {
-    public static void
+        for (int i = 0; i < n; i++) {
 
-    main(String
+            // 토큰에 input 저장
+            StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+            int count = st.countTokens();
+            String[] arr = new String[count];
 
-    []
-    args
-)
-    throws
-    IOException {
-    Stack<Integer>
+            // Converting each token to array
+            for (int x = 0; x < arr.length; x++) {
+                arr[x] = st.nextToken();
+            }
 
-    stk = new Stack < > ();
-    BufferedReader
-    br = new BufferedReader(new InputStreamReader(System.in));
-    int
-    n = Integer.parseInt(br.readLine());
+            // 연산 start
+            if (arr[0] == "push") {
+                Integer ele = Integer.parseInt(arr[1]);
+                stk.push(ele);
 
-    for(int
+            } else if (arr[0] == "pop") {
+                if (stk.pop() == -1) {
+                    System.out.println("-1");
+                } else {
+                    Integer popped = stk.pop();
+                    System.out.print(popped);
+                }
 
-    i = 0;
+            } else if (arr[0] == "top") {
+                if (stk.peek() == 0) {
+                    System.out.println("-1");
+                } else {
+                    Integer peeked = stk.peek();
+                    System.out.print(peeked);
+                }
 
-    i < n;
+            } else if (arr[0] == "size") {
+                Integer size = stk.size();
+                System.out.print(size);
 
-    i
-++) {
-
-    // 토큰에 input 저장
-    StringTokenizer
-    st = new StringTokenizer(br.readLine(), " ");
-    int
-    count = st.countTokens();
-    String
-    []
-    arr = new String[count];
-
-    // Converting each token to array
-    for(int
-
-    x = 0;
-
-    x < arr
-
-.
-    length;
-    x
-++) {
-    arr
-    [x] = st.nextToken();
-}
-
-// 연산 start
-if (arr[0] == "push") {
-    Integer
-    ele = Integer.parseInt(arr[1]);
-    stk.push(ele);
-
-} else if (arr[0] == "pop") {
-    if (stk.pop() == -1) {
-        System.out.println("-1");
-    } else {
-        Integer
-        popped = stk.pop();
-        System.out.print(popped);
+            } else if (arr[0] == "empty") {
+                if (stk.isEmpty()) {
+                    System.out.println("1");
+                } else {
+                    System.out.println("0");
+                }
+            }
+        }
     }
-
-} else if (arr[0] == "top") {
-    if (stk.peek() == 0) {
-        System.out.println("-1");
-    } else {
-        Integer
-        peeked = stk.peek();
-        System.out.print(peeked);
-    }
-
-} else if (arr[0] == "size") {
-    Integer
-    size = stk.size();
-    System.out.print(size);
-
-} else if (arr[0] == "empty") {
-    if (stk.isEmpty()) {
-        System.out.println("1");
-    } else {
-        System.out.println("0");
-    }
-}
-}
-}
 }
 ```
 
 > 2차
 >
 
-```jsx
-public
+```java
+public class Main {
+    public static void main(String[] args) throws IOException {
+        Stack<Integer> stk = new Stack<>();
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int n = Integer.parseInt(br.readLine());
 
-class Main {
-    public static void
+        for (int i = 0; i < n; i++) {
 
-    main(String
+            // 토큰에 input 저장
+            StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+            int count = st.countTokens();
+            String[] arr = new String[count];
 
-    []
-    args
-)
-    throws
-    IOException {
-    Stack<Integer>
+            // Converting each token to array
+            for (int x = 0; x < arr.length; x++) {
+                arr[x] = st.nextToken();
+            }
 
-    stk = new Stack < > ();
-    BufferedReader
-    br = new BufferedReader(new InputStreamReader(System.in));
-    int
-    n = Integer.parseInt(br.readLine());
+            // 연산 start
+            if (arr[0].equals("push")) {
+                Integer ele = Integer.parseInt(arr[1]);
+                stk.push(ele);
 
-    for(int
+            } else if (arr[0].equals("pop")) {
+                if (stk.isEmpty()) {
+                    System.out.println("-1");
+                } else {
+                    int popped = stk.pop();
+                    System.out.println(popped);
+                }
 
-    i = 0;
+            } else if (arr[0].equals("top")) {
+                if (stk.isEmpty()) {
+                    System.out.println("-1");
+                } else {
+                    int peeked = stk.peek();
+                    System.out.println(peeked);
+                }
 
-    i < n;
+            } else if (arr[0].equals("size")) {
+                int size = stk.size();
+                System.out.println(size);
 
-    i
-++) {
-
-    // 토큰에 input 저장
-    StringTokenizer
-    st = new StringTokenizer(br.readLine(), " ");
-    int
-    count = st.countTokens();
-    String
-    []
-    arr = new String[count];
-
-    // Converting each token to array
-    for(int
-
-    x = 0;
-
-    x < arr
-
-.
-    length;
-    x
-++) {
-    arr
-    [x] = st.nextToken();
-}
-
-// 연산 start
-if (arr[0].equals("push")) {
-    Integer
-    ele = Integer.parseInt(arr[1]);
-    stk.push(ele);
-
-} else if (arr[0].equals("pop")) {
-    if (stk.isEmpty()) {
-        System.out.println("-1");
-    } else {
-        int
-        popped = stk.pop();
-        System.out.println(popped);
+            } else if (arr[0].equals("empty")) {
+                if (stk.isEmpty()) {
+                    System.out.println("1");
+                } else {
+                    System.out.println("0");
+                }
+            }
+        }
     }
-
-} else if (arr[0].equals("top")) {
-    if (stk.isEmpty()) {
-        System.out.println("-1");
-    } else {
-        int
-        peeked = stk.peek();
-        System.out.println(peeked);
-    }
-
-} else if (arr[0].equals("size")) {
-    int
-    size = stk.size();
-    System.out.println(size);
-
-} else if (arr[0].equals("empty")) {
-    if (stk.isEmpty()) {
-        System.out.println("1");
-    } else {
-        System.out.println("0");
-    }
-}
-}
-}
 }
 ```
 
@@ -330,6 +252,7 @@ if (arr[0].equals("push")) {
 
 ‘peek’ 명령 후에 더 이상 출력을 요구하는 명령이 없었기 때문에, peek 명령의 결과가 버퍼에 남아있게 된다. 버퍼는 일반적으로 줄바꿈 발생, 출력 버퍼 가득 참, 프로그램 종료 시 비워진다. 따라서,
 ‘top’ 명령을 수행한 후 엔터를 입력해야 출력 버퍼가 비워지고 ‘3’이 출력되었던 것이다. → flush() 호출하여 출력 버퍼 수동으로 비워준다.
+
 
 ---
 2024년 2월 15일
@@ -424,72 +347,67 @@ if (arr[0].equals("push")) {
 > 성공
 >
 
-```jsx
+```java
 public
-
 class Main {
     public static void
 
     main(String
 
-    []
-    args
-) {
-    Scanner
-    sc = new Scanner(System.in);
-    int
-    k = sc.nextInt();
+                 []
+                 args
+    ) {
+        Scanner
+                sc = new Scanner(System.in);
+        int
+                k = sc.nextInt();
 
-    //Declare 스택
-    Stack<Integer>
+        //Declare 스택
+        Stack<Integer>
 
-    stack = new Stack < > ();
+                stack = new Stack<>();
 
-    /**
-     * for문으로 stack에 값 입력
-     * 만약, "0"이면 가장 최근에 stack에 입력된 값 pop, 0일 경우, !stack.isEmpty 보장
-     * 아니면, push
-     */
-    for(int
+        /**
+         * for문으로 stack에 값 입력
+         * 만약, "0"이면 가장 최근에 stack에 입력된 값 pop, 0일 경우, !stack.isEmpty 보장
+         * 아니면, push
+         */
+        for (int
 
-    i = 0;
+             i = 0;
 
-    i < k;
+             i < k;
 
-    i
-++) {
-    int
-    num = sc.nextInt();
+             i
+                     ++) {
+            int
+                    num = sc.nextInt();
 
-    if(num
+            if (num
 
-==
-    0
-) {
-    stack
-.
+                    ==
+                    0
+            ) {
+                stack
+                        .
 
-    pop();
-}
-
-else
-{
-    stack.push(num);
-}
-}
+                        pop();
+            } else {
+                stack.push(num);
+            }
+        }
 
 /**
  * print: 스택의 모든 원소 합
  */
-int
-answer = 0;
-for (int element : stack
-)
-{
-    answer += element;
-}
-System.out.println(answer);
-}
+        int
+                answer = 0;
+        for (int element : stack
+        ) {
+            answer += element;
+        }
+        System.out.println(answer);
+    }
 }
 ```
 
@@ -511,21 +429,18 @@ k = Integer.parseInt(br.readLine());
 위가 BufferdReader, 아래가 Scanner
 
 ---
-2024년 2월 16일
 
 # ☻ 스택 수열
 
-| 시간 제한 | 메모리 제한 | 제출     | 정답    | 맞힌 사람 | 정답 비율   |
-|-------|--------|--------|-------|-------|---------|
-| 2 초   | 128 MB | 152238 | 59182 | 41275 | 37.941% |
+| 시간 제한 | 메모리 제한 | 제출 | 정답 | 맞힌 사람 | 정답 비율 |
+| --- | --- | --- | --- | --- | --- |
+| 2 초 | 128 MB | 152238 | 59182 | 41275 | 37.941% |
 
 ## 문제
 
-스택 (stack)은 기본적인 자료구조 중 하나로, 컴퓨터 프로그램을 작성할 때 자주 이용되는 개념이다. 스택은 자료를 넣는 (push) 입구와 자료를 뽑는 (pop) 입구가 같아 제일 나중에 들어간 자료가 제일
-먼저 나오는 (LIFO, Last in First out) 특성을 가지고 있다.
+스택 (stack)은 기본적인 자료구조 중 하나로, 컴퓨터 프로그램을 작성할 때 자주 이용되는 개념이다. 스택은 자료를 넣는 (push) 입구와 자료를 뽑는 (pop) 입구가 같아 제일 나중에 들어간 자료가 제일 먼저 나오는 (LIFO, Last in First out) 특성을 가지고 있다.
 
-1부터 n까지의 수를 스택에 넣었다가 뽑아 늘어놓음으로써, 하나의 수열을 만들 수 있다. 이때, 스택에 push하는 순서는 반드시 오름차순을 지키도록 한다고 하자. 임의의 수열이 주어졌을 때 스택을 이용해 그 수열을
-만들 수 있는지 없는지, 있다면 어떤 순서로 push와 pop 연산을 수행해야 하는지를 알아낼 수 있다. 이를 계산하는 프로그램을 작성하라.
+1부터 n까지의 수를 스택에 넣었다가 뽑아 늘어놓음으로써, 하나의 수열을 만들 수 있다. 이때, 스택에 push하는 순서는 반드시 오름차순을 지키도록 한다고 하자. 임의의 수열이 주어졌을 때 스택을 이용해 그 수열을 만들 수 있는지 없는지, 있다면 어떤 순서로 push와 pop 연산을 수행해야 하는지를 알아낼 수 있다. 이를 계산하는 프로그램을 작성하라.
 
 ## 입력
 
@@ -590,46 +505,43 @@ NO
 
 ## 힌트
 
-1부터 n까지에 수에 대해 차례로 [push, push, push, push, pop, pop, push, push, pop, push, push, pop, pop, pop, pop, pop] 연산을 수행하면
-수열 [4, 3, 6, 8, 7, 5, 2, 1]을 얻을 수 있다.
+1부터 n까지에 수에 대해 차례로 [push, push, push, push, pop, pop, push, push, pop, push, push, pop, pop, pop, pop, pop] 연산을 수행하면 수열 [4, 3, 6, 8, 7, 5, 2, 1]을 얻을 수 있다.
 
 # ☺︎ a/t
 
 1. 콘솔에 한 줄에 하나씩 입력되는 순서대로 stack에 들어가야 함
 2. 스택에 순서대로 값을 넣기 위해
-    1. 배열에 숫자들을 입력해두고, 꺼내서 Stack에 Push 하며 “+”를 출력
-    2. 만약 4,3,6 순서대로 스택에 입력하고 싶다면 4까지 넣은 이후 4를 pop, 이후 3을 pop, 그리고 6은 마지막 입력값 다음인 5-6을 입력 후 6 pop
+   1. 배열에 숫자들을 입력해두고, 꺼내서 Stack에 Push 하며 “+”를 출력
+   2. 만약 4,3,6 순서대로 스택에 입력하고 싶다면 4까지 넣은 이후 4를 pop, 이후 3을 pop, 그리고 6은 마지막 입력값 다음인 5-6을 입력 후 6 pop
 
 # ☺︎ Snippets
 
 > 1차
 >
 
-```jsx
-Stack < Integer > stack = new Stack < > ();
+```java
+public class Main {
+    public static void main(String[] args) {
+        Stack<Integer> stack = new Stack<>();
 
-int
-start = 1;
+        int start = 1;
 
-for (int i = 0;
-i < n;
-i++
-)
-{
-    int
-    x = sc.nextInt();
+        for (int i = 0; i < n; i++) {
+            int x = sc.nextInt();
 
-    while (start <= x) {
-        stack.push(start);
-        System.out.println("+");
+            while (start <= x) {
+                stack.push(start);
+                System.out.println("+");
 
-        // peek 4일 때, x와 동일하니 pop
-        while (stack.peek() != x) {
-            System.out.println("-");
+                // peek 4일 때, x와 동일하니 pop
+                while (stack.peek() != x) {
+                    System.out.println("-");
+                }
+                start++;
+            }
+            start = start + x;
         }
-        start++;
     }
-    start = start + x;
 }
 ```
 
@@ -638,206 +550,94 @@ i++
 > 2차 메모리 초과
 >
 
-```jsx
-import java
-
-.
-util.Scanner;
-import java
-
-.
-util.Stack;
+```java
+import java.util.Scanner;
+import java.util.Stack;
 
 /**
  * start 변수를 언제 초기화해야 하는지
  */
 
-public
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        StringBuilder sb = new StringBuilder();
+        Stack<Integer> stack = new Stack<>();
+        int start = 0;
 
-class Main {
-    public static void
+        int n = sc.nextInt();
+        for (int k = 0; k < n; k++) {
+            int x = sc.nextInt();
 
-    main(String
-
-    []
-    args
-) {
-    Scanner
-    sc = new Scanner(System.in);
-    StringBuilder
-    sb = new StringBuilder();
-
-    Stack<Integer>
-
-    stack = new Stack < > ();
-    int
-    start = 0;
-
-    int
-    n = sc.nextInt();
-
-    for(int
-
-    k = 0;
-
-    k < n;
-
-    k
-++) {
-    int
-    x = sc.nextInt();
-
-    // start < x라면, start 부터 x 까지 삽입해줘야 함
-    // 어디까지 입력 받았는지 알기 위해, start를 x로 초기화 (x까지 입력했기 때문에 5부터 push해주기 위함)
-    // 4까지 입력, 6을 push하기 위해 next 5부터 입력되어야 함
-    if(start
-
-<
-    x
-) {
-    for(int
-
-    i = start + 1;
-    i
-<=
-    x;
-    i
-++) {
-    stack
-.
-
-    push(i);
-
+            // start < x라면, start 부터 x 까지 삽입해줘야 함
+            // 어디까지 입력 받았는지 알기 위해, start를 x로 초기화 (x까지 입력했기 때문에 5부터 push해주기 위함)
+            // 4까지 입력, 6을 push하기 위해 next 5부터 입력되어야 함
+            if (start < x) {
+                for (int i = start + 1; i <= x; i++) {
+                    stack.push(i);
 //                    System.out.println("Push: " + i);
-    sb
-.
-
-    append(
-
-    "+"
-).
-
-    append(
-
-    "\n"
-)
-    ;
-}
-
-start = x;
-}
-// stack의 peek과, x과 같은 경우 Pop
-if (stack.peek() == x) {
-    stack.pop();
-    sb.append("-").append("\n");
-} else {
-    sb.append("NO").append("\n");
-}
-}
-System.out.println(sb);
-}
+                    sb.append("+").append("\n");
+                }
+                start = x;
+            }
+            // stack의 peek과, x과 같은 경우 Pop
+            if (stack.peek() == x) {
+                stack.pop();
+                sb.append("-").append("\n");
+            } else {
+                sb.append("NO").append("\n");
+            }
+        }
+        System.out.println(sb);
+    }
 }
 ```
 
 - **Things to Improve**
-    - start 변수 초기화 시점 (4까지 입력되었고, pop을 완료했다. 이후 6을 push하기 위해선 5~6이 push 되어야 하므로, x값으로 reset 해주어야 한다.
-        - 다음에 push할 값이 b/4 턴의 x보다 작아도 관게없다. 오름차순으로 stack에 push 되었을 것이다.
-            - start<x로 e.i. 4 push 이후, 다음 Input이 3이다. `start < x`로 체크하고,  `stack.peek()==x`에서 true일 것이므로 pop될 수 있다.
+   - start 변수 초기화 시점 (4까지 입력되었고, pop을 완료했다. 이후 6을 push하기 위해선 5~6이 push 되어야 하므로, x값으로 reset 해주어야 한다.
+      - 다음에 push할 값이 b/4 턴의 x보다 작아도 관게없다. 오름차순으로 stack에 push 되었을 것이다.
+         - start<x로 e.i. 4 push 이후, 다음 Input이 3이다. `start < x`로 체크하고,  `stack.peek()==x`에서 true일 것이므로 pop될 수 있다.
 
 > 3차
 >
 
-```jsx
-public
+```java
+public class Main {
+    public static void main(String[] args) throws IOException {
 
-class Main {
-    public static void
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringBuilder sb = new StringBuilder();
+        Stack<Integer> stack = new Stack<>();
+        int start = 0;
 
-    main(String
+        int n = Integer.parseInt(br.readLine());
+        for (int k = 0; k < n; k++) {
+            int x = Integer.parseInt(br.readLine());
 
-    []
-    args
-)
-    throws
-    IOException {
-
-    BufferedReader
-    br = new BufferedReader(new InputStreamReader(System.in));
-    StringBuilder
-    sb = new StringBuilder();
-
-    Stack<Integer>
-
-    stack = new Stack < > ();
-    int
-    start = 0;
-
-    int
-    n = Integer.parseInt(br.readLine());
-
-    for(int
-
-    k = 0;
-
-    k < n;
-
-    k
-++) {
-    int
-    x = Integer.parseInt(br.readLine());
-
-    // start < x라면, start 부터 x 까지 삽입해줘야 함
-    // 어디까지 입력 받았는지 알기 위해, start를 x로 초기화 (x까지 입력했기 때문에 5부터 push해주기 위함)
-    // 4까지 입력, 6을 push하기 위해 next 5부터 입력되어야 함
-    if(start
-
-<
-    x
-) {
-    for(int
-
-    i = start + 1;
-    i
-<=
-    x;
-    i
-++) {
-    stack
-.
-
-    push(i);
-
+            // start < x라면, start 부터 x 까지 삽입해줘야 함
+            // 어디까지 입력 받았는지 알기 위해, start를 x로 초기화 (x까지 입력했기 때문에 5부터 push해주기 위함)
+            // 4까지 입력, 6을 push하기 위해 next 5부터 입력되어야 함
+            if (start < x) {
+                for (int i = start + 1; i <= x; i++) {
+                    stack.push(i);
 //                    System.out.println("Push: " + i);
-    sb
-.
-
-    append(
-
-    "+"
-).
-
-    append(
-
-    "\n"
-)
-    ;
-}
-
-start = x;
-}
-// stack의 peek과, x과 같은 경우 Pop
-if (stack.peek() == x) {
-    stack.pop();
-    sb.append("-").append("\n");
-} else {
-    System.out.println("NO");
-    return;
-}
-}
-System.out.println(sb);
-}
+                    sb.append("+").append("\n");
+                }
+                start = x;
+            }
+            // stack의 peek과, x과 같은 경우 Pop
+            if (stack.peek() == x) {
+                stack.pop();
+                sb.append("-").append("\n");
+            } else {
+                System.out.println("NO");
+                return;
+            }
+        }
+        System.out.println(sb);
+    }
 }
 ```
 
 - Things to Improve
-    - “NO” 출력할 때도 sb에 추가함. → return하기에 시스템 종료되는데, sb에 추가함.
+   - “NO” 출력할 때도 sb에 추가함. → return하기에 시스템 종료되는데, sb에 추가함.
