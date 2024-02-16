@@ -5,7 +5,7 @@ categories:
   - DataStructure
 tags:
   [
-    DataStructure 
+    DataStructure
   ]
 ---
 
@@ -17,22 +17,23 @@ tags:
 ## 스택 구성도
 
 ![image](https://github.com/subeenjeonHere/subeenjeonHere.github.io/assets/145312273/34d98fbf-2319-405d-a23f-851d914953c2)
+
 - 한 방향으로만 `PUSH`와 `POP`을 이용하여 자료를 넣고 꺼낸다.
 - `TOP` 은 스택에서 가장 위에있는 데이터로, 스택 포인터(Stack Pointer)라고도 불린다.
 
 ## 스택 연산
 
-| 연산 | 설명 |
-| --- | --- |
-| push() | item 하나를 스택의 가장 윗 부분에 추가 |
-| pop() | 스택의 가장 위에있는 데이터를 제거하고, 꺼냄 |
-| peek() | 스택의 가장 위에 있는 항목을 반환 |
-| isEmpty() | 스택이 비어있을 때 true 반환 |
-| isFull() | 스택이 가득 찼다면, true 반환 |
+| 연산        | 설명                        |
+|-----------|---------------------------|
+| push()    | item 하나를 스택의 가장 윗 부분에 추가  |
+| pop()     | 스택의 가장 위에있는 데이터를 제거하고, 꺼냄 |
+| peek()    | 스택의 가장 위에 있는 항목을 반환       |
+| isEmpty() | 스택이 비어있을 때 true 반환        |
+| isFull()  | 스택이 가득 찼다면, true 반환       |
 
 ## 스택 구현
 
-```jsx
+```java
 public class Stack {
     public static <arr> void main(String[] args) {
         int[] arr = {1, 1, 3, 3, 0, 1, 1};
@@ -59,8 +60,6 @@ public class Stack {
     }
 }
 ```
-
-
 
 ---
 
