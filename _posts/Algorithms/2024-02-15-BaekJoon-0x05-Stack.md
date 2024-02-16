@@ -348,68 +348,41 @@ public class Main {
 >
 
 ```java
-public
-class Main {
-    public static void
-
-    main(String
-
-                 []
-                 args
-    ) {
-        Scanner
-                sc = new Scanner(System.in);
-        int
-                k = sc.nextInt();
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int k = sc.nextInt();
 
         //Declare 스택
-        Stack<Integer>
-
-                stack = new Stack<>();
+        Stack<Integer> stack = new Stack<>();
 
         /**
          * for문으로 stack에 값 입력
          * 만약, "0"이면 가장 최근에 stack에 입력된 값 pop, 0일 경우, !stack.isEmpty 보장
          * 아니면, push
          */
-        for (int
-
-             i = 0;
-
-             i < k;
-
-             i
-                     ++) {
-            int
-                    num = sc.nextInt();
-
-            if (num
-
-                    ==
-                    0
-            ) {
-                stack
-                        .
-
-                        pop();
+        for (int i = 0; i < k; i++) {
+            int num = sc.nextInt();
+            if (num == 0) {
+                stack.pop();
             } else {
                 stack.push(num);
             }
         }
 
-/**
- * print: 스택의 모든 원소 합
- */
-        int
-                answer = 0;
-        for (int element : stack
-        ) {
+        /**
+         * print: 스택의 모든 원소 합
+         */
+        int answer = 0;
+        for (int element : stack) {
             answer += element;
         }
         System.out.println(answer);
     }
 }
 ```
+
+
 
 > BufferdReader로 풀기
 
@@ -424,7 +397,7 @@ k = Integer.parseInt(br.readLine());
 
 > 메모리, 시간
 
-![image](https://github.com/subeenjeonHere/ct_bgn/assets/145312273/149e1b7b-7198-4fe7-a86c-5db50ec14188)
+![image](https://github.com/subeenjeonHere/subeenjeonHere.github.io/assets/145312273/95ec89fe-541d-42df-a054-4e5c9fb0ae3f)
 
 위가 BufferdReader, 아래가 Scanner
 
