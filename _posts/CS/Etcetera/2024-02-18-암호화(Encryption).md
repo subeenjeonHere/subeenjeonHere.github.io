@@ -101,7 +101,7 @@ tags:
 
 ---
 
-### Appendix
+# ✏️ Appendix
 
 스프링에서 `PasswordEncoder` 인터페이스를 사용한 적이 있다.
 
