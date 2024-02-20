@@ -9,6 +9,23 @@ tags:
   ]
 ---
 
+<!-- TOC -->
+* [☻ 트랜잭션(Transaction)과 로킹(Locking)](#-트랜잭션transaction과-로킹locking)
+    * [간략히 정리하면](#간략히-정리하면)
+* [☻ 트랜잭션(Transaction)](#-트랜잭션transaction)
+* [트랜잭션의 목적은?](#트랜잭션의-목적은)
+* [트랜잭션 특징](#트랜잭션-특징)
+* [☺︎ 트랜잭션 성질 (ACID 성질)](#-트랜잭션-성질-acid-성질)
+    * [컴퓨터 공학에서 영속성(Persistence)란?](#컴퓨터-공학에서-영속성persistence란)
+* [☺︎ 트랜잭션 연산](#-트랜잭션-연산)
+  * [커밋 연산 (Commit Operation)](#커밋-연산-commit-operation)
+  * [롤백 연산 (Rollback Operation)](#롤백-연산-rollback-operation)
+* [☺︎ 병행 제어 (일관성 주요 기법)](#-병행-제어-일관성-주요-기법)
+* [☺︎ 트랜잭션 상태](#-트랜잭션-상태)
+<!-- TOC -->
+
+---
+
 # ☻ 트랜잭션(Transaction)과 로킹(Locking)
 
 2024년 2월 20일
