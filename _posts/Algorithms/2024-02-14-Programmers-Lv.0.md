@@ -1026,3 +1026,62 @@ public class Main {
 | public char charAt(int index) | 이 문자열에서 지정된 위치의 char 값을 반환한다. 인덱싱은 0부터 시작한다. index 인자가 음수이거나 이 문자열의 길이보다 크거나 같을 경우 IndexOutOfBoundsException을 발생 |
 
 ---
+
+# ☻ 짝수는 싫어요
+
+2024년 2월 19일
+
+### **문제 설명**
+
+정수 `n`이 매개변수로 주어질 때, `n` 이하의 홀수가 오름차순으로 담긴 배열을 return하도록 solution 함수를 완성해주세요.
+
+---
+
+### 제한사항
+
+- 1 ≤ `n` ≤ 100
+
+---
+
+### 입출력 예
+
+| n | result |
+| --- | --- |
+| 10 | [1, 3, 5, 7, 9] |
+| 15 | [1, 3, 5, 7, 9, 11, 13, 15] |
+
+---
+
+# ☺︎ a/t
+
+1. start = 1; 로 설정하고 %2 != 0일 때를 고려하여 배열에 추가하면, 1, 0, 3, 0 이런 식으로 배열에 추가되는 문제점
+2. ArrayList를 활용하기
+
+# ☺︎ Snippets
+
+```java
+import java.util.*;
+class Solution {
+    public ArrayList<Integer> solution(int n) {
+        
+        ArrayList<Integer> arrst = new ArrayList<>();
+        
+        int start = 1;
+        while(start<=n){
+            if( start %2 == 1){
+                arrst.add(start);
+            }
+            start ++;
+        }
+        return arrst;
+    }
+}
+```
+
+### 해결
+
+1차원 배열을 사용하고, i 값을 하나씩 카운팅하여 일치하면 배열에 저장할 경우 1, 0, 3 이런 식으로 저장되는 문제점이 있었다.
+
+ArrayList는 필요에 따라 배열 크기를 동적으로 늘리거나 줄일 수 있으므로, 얼만큼의 요소를 저장할 지 모를 때 특히 유용하다.
+
+특히 표준 배열을 사용했다면 정확한 크기를 알아야 했고, 요소들 사이에 빈 인덱스가 생길 수도 있었는데 ArrayLIst를 사용해서 해결하였다.
