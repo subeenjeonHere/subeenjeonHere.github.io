@@ -99,3 +99,133 @@ public class Solution {
 7. 여기서 사용된 stack 연산은 push, pop, peek, isEmpty 연산임. 스택의 Operation과 스택에 자료가 어떻게 삽입되고 저장 되는지를 구현하는 기본적인 문제였음.
 
 ---
+
+# ☻ 평균 구하기
+
+2024년 2월 20일
+
+### **문제 설명**
+
+정수를 담고 있는 배열 arr의 평균값을 return하는 함수, solution을 완성해보세요.
+
+### **제한사항**
+
+- arr은 길이 1 이상, 100 이하인 배열입니다.
+- arr의 원소는 -10,000 이상 10,000 이하인 정수입니다.
+
+### **입출력 예**
+
+| arr | return |
+| --- | --- |
+| [1,2,3,4] | 2.5 |
+| [5,5] | 5 |
+
+---
+
+# ☺︎ Snippets
+
+```java
+class Solution {
+    public double solution(int[] arr) {
+        double answer = 0;
+        int start = 0;
+        while(start<arr.length){
+            answer += arr[start];
+        }
+        answer = answer / arr.length;
+        return answer;
+    }
+}
+```
+
+```java
+실행 시간이 10.0초를 초과하여 실행이 중단되었습니다. 실행 시간이 더 짧은 다른 방법을 찾아보세요.
+```
+
+# ☠️
+
+```java
+import java.util.*;
+class Solution {
+    public double solution(int[] arr) {
+        double answer = 0;
+        
+        List<Integer> list = new ArrayList<>();
+        for(int i=0; i<arr.length; i++){
+            list.add(arr[i]);
+        }
+        answer = list.stream()
+            .mapToDouble(Integer::doubleValue)
+            .average()
+            .orElse(0.0);
+        return answer;
+    }
+}
+```
+
+```java
+정확성  테스트
+테스트 1 〉	통과 (6.96ms, 75.5MB)
+테스트 2 〉	통과 (4.29ms, 84.9MB)
+테스트 3 〉	통과 (3.51ms, 77.2MB)
+테스트 4 〉	통과 (6.66ms, 75.4MB)
+테스트 5 〉	통과 (5.08ms, 78.4MB)
+테스트 6 〉	통과 (4.48ms, 77.8MB)
+테스트 7 〉	통과 (5.45ms, 77.5MB)
+테스트 8 〉	통과 (5.07ms, 72.4MB)
+테스트 9 〉	통과 (4.60ms, 83.7MB)
+테스트 10 〉	통과 (3.61ms, 74.1MB)
+테스트 11 〉	통과 (4.99ms, 74MB)
+테스트 12 〉	통과 (3.03ms, 75.8MB)
+테스트 13 〉	통과 (3.66ms, 75.1MB)
+테스트 14 〉	통과 (3.61ms, 77.6MB)
+테스트 15 〉	통과 (3.27ms, 74.8MB)
+테스트 16 〉	통과 (3.01ms, 75.2MB)
+```
+
+
+### Stream API
+
+데이터의 흐름을 처리하는데 특화된 인터페이스임. 특히 데이터 병렬 처리를 쉽게 구현할 수 있도록 돕는다. 스트림 API는 데이터를 '스트림'으로 처리한다는 개념에서 이름이 유래되었다고 함.
+
+‘스트림'은 **데이터의 연속적인 흐름**을 의미하며, 이 흐름을 여러 가지 방법으로 변환하거나 추출하는 것이 가능하다. 예를 들어, 리스트의 모든 요소를 특정 조건에 따라 필터링하거나, 각 요소에 함수를 적용하는 것이 가능하다.
+
+'API'로 부르는 이유는, **스트림 API가 데이터 처리를 위한 메서드와 연산**을 제공하는 애플리케이션 프로그래밍 인터페이스(API)이기 때문이라고 한다. **API**는 특정 기능을 사용하기 위한 메서드나 도구를 제공하는 것.
+
+### 그럼 다르게 풀 수 있겠다는 생각이
+
+```java
+import java.util.*;
+class Solution {
+    public double solution(int[] arr) {
+
+        double answer = 0;
+        answer = Arrays.stream(arr)
+            .average()
+            .getAsDouble();
+        return answer;
+    }
+}
+```
+
+이렇게도 풀 수 있다.
+
+```java
+테스트 1 〉	통과 (2.90ms, 75.1MB)
+테스트 2 〉	통과 (2.79ms, 74MB)
+테스트 3 〉	통과 (2.69ms, 74.9MB)
+테스트 4 〉	통과 (3.40ms, 73.2MB)
+테스트 5 〉	통과 (3.45ms, 84.1MB)
+테스트 6 〉	통과 (3.42ms, 80.6MB)
+테스트 7 〉	통과 (2.23ms, 74.4MB)
+테스트 8 〉	통과 (1.96ms, 78.8MB)
+테스트 9 〉	통과 (2.12ms, 75.9MB)
+테스트 10 〉	통과 (1.93ms, 77.6MB)
+테스트 11 〉	통과 (2.73ms, 76.4MB)
+테스트 12 〉	통과 (1.84ms, 76.7MB)
+테스트 13 〉	통과 (2.29ms, 71.3MB)
+테스트 14 〉	통과 (1.87ms, 68.5MB)
+테스트 15 〉	통과 (2.01ms, 74.8MB)
+테스트 16 〉
+```
+---
