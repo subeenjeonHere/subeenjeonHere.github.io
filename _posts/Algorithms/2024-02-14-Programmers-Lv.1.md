@@ -229,3 +229,50 @@ class Solution {
 테스트 16 〉
 ```
 ---
+
+# ☻ 짝수와 홀수
+
+2024년 2월 20일
+
+### **문제 설명**
+
+정수 num이 짝수일 경우 "Even"을 반환하고 홀수인 경우 "Odd"를 반환하는 함수, solution을 완성해주세요.
+
+### 제한 조건
+
+- num은 int 범위의 정수입니다.
+- 0은 짝수입니다.
+
+### 입출력 예
+
+| num | return |
+| --- | --- |
+| 3 | "Odd" |
+| 4 | "Even" |
+
+---
+
+# ☺︎ Snippets
+
+```java
+class Solution {
+    public String solution(int num) {
+
+        String answer = "";
+        answer = (num%2==0) ? "Even" : "Odd";
+        return answer;
+    }
+}
+```
+
+삼항연산자로 풀었다.
+
+# Java 삼항 연산자
+
+삼항 연산자는 Java에서 사용하는 조건 연산자. 이 연산자는 세 개의 피연산자를 가지며, "조건 ? 값1 : 값2"와 같은 형태로 사용된다.
+
+조건 부분은 boolean 표현식이어야 하며,
+
+이 조건이 참(true)일 경우에는 값1이 반환되고, 거짓(false)일 경우에는 값2가 반환된다.
+
+---
