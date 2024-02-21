@@ -273,3 +273,277 @@ int[] cnt = new int[10];
 수정하였고, 통과 완료.
 
 ---
+
+
+### ☻ 방 번호
+
+2024년 2월 16일 2024년 2월 21일
+
+| 시간 제한 | 메모리 제한 | 제출 | 정답 | 맞힌 사람 | 정답 비율 |
+| --- | --- | --- | --- | --- | --- |
+| 2 초 | 128 MB | 65801 | 29916 | 22385 | 44.096% |
+
+## 문제
+
+다솜이는 은진이의 옆집에 새로 이사왔다. 다솜이는 자기 방 번호를 예쁜 플라스틱 숫자로 문에 붙이려고 한다.
+
+다솜이의 옆집에서는 플라스틱 숫자를 한 세트로 판다. 한 세트에는 0번부터 9번까지 숫자가 하나씩 들어있다. 다솜이의 방 번호가 주어졌을 때, 필요한 세트의 개수의 최솟값을 출력하시오. (6은 9를 뒤집어서 이용할 수 있고, 9는 6을 뒤집어서 이용할 수 있다.)
+
+## 입력
+
+첫째 줄에 다솜이의 방 번호 N이 주어진다. N은 1,000,000보다 작거나 같은 자연수이다.
+
+## 출력
+
+첫째 줄에 필요한 세트의 개수를 출력한다.
+
+## 예제 입력 1
+
+```
+9999
+```
+
+## 예제 출력 1
+
+```
+2
+```
+
+## 예제 입력 2
+
+```
+122
+```
+
+## 예제 출력 2
+
+```
+2
+```
+
+## 예제 입력 3
+
+```
+12635
+```
+
+## 예제 출력 3
+
+```
+1
+```
+
+## 예제 입력 4
+
+```
+888888
+```
+
+## 예제 출력 4
+
+```
+6
+```
+
+# ☺︎ a/t
+
+1. 6,9 제외 같은 값이 2개 이상이면 최소 2개 이상 필요
+    1. 같은 값이 두 개 있다면 1*2 같은 값이 세 개 있다면 1*3
+    2. 즉, 6과 9를 제외한 동일한 숫자 개수를 x라고 가정했을 때, 1*x 만큼의 세트가 필요
+2. imp;
+    1. 6과 9를 동일한 숫자로 처리할 방법
+    2. 세트를 카운팅 할 방법
+3. **이렇게 써보자**
+    1. char 배열에 0~9까지 저장
+        1. 6, 9는 같은 값으로 어떻게 취급?
+            1. 만약, 6 or 9 일경우
+            2. 전체 카운팅한 후 6 and 9를 찾아서 전체 개수를 더하고 / 2
+    2. 이중 for문 순회하며 char 배열 비교
+        1. result의 기본값은 1, char에서 같은 값 (==) 있을 경우, ++ (1씩 증가)
+    3. 6,9를 어떻게 처리할 것인가
+        - 6 9 9 일 경우
+            - 2세트 필요
+        - 6 9 9 9
+            - 2세트
+        - 66669
+            - 3세트
+        - 6, 9는 같은 값이므로 → 2로 나누고, 올림해줌
+
+---
+
+# ☺︎ Snippets
+
+> 1차
+>
+
+```sql
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+public class Main {
+    public static void main(String[] args) throws IOException {
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        char val = (int) 48;
+        int n = Integer.parseInt(String.valueOf(val));
+
+        int[] arr = new int[10];
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = n;
+            n++;
+        }
+        int num = Integer.parseInt(br.readLine());
+        char[] chars = String.valueOf(num).toCharArray();
+
+        int result = 1;
+        for (int i = 0; i <= chars.length - 1; i++) {
+            for (int j = i + 1; j < chars.length; j++) {
+                if (chars[i] == chars[j]) {
+                    result++;
+                }
+            }
+        }
+
+        int idx = 0;
+        int count = 0;
+        while (idx < chars.length) {
+            if (chars[idx] == '9' && chars[idx] == '6') {
+                
+                count++;
+            }
+            idx++;
+        }
+
+        if (count >= 1) {
+            System.out.println(result / count + 1);
+        } else {
+            System.out.println(result);
+        }
+    }
+}
+```
+
+> 2차
+>
+
+```java
+public class Main2 {
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        String size = sc.nextLine();
+        int[] arr = new int[size.length()];
+
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = Integer.parseInt(String.valueOf(size.charAt(i)));
+        }
+        int[] count = new int[10];
+        int maxval = 0;
+        int sum = 0;
+
+        //카운트 배열에 카운팅
+        for (int i = 0; i < arr.length; i++) {
+
+            //6,9를 제외하고 카운팅
+            if (arr[i] != 6 && arr[i] != 9) {
+                count[arr[i]]++;
+
+                //6,9의 개수 세기 -> 6이거나 9라면 sum 1씩 증가
+            } else if (arr[i] == 6 || arr[i] == 9) {
+                sum++;
+            }
+            //Get max from count array
+            maxval = Arrays.stream(count).max().getAsInt();
+        }
+
+        int result = 0;
+        if (sum % 2 == 0) {
+            result = maxval + sum / 2;
+        } else if (sum % 2 == 1) {
+            result = maxval + sum / 2 + 1;
+
+        }
+        System.out.println(result);
+    }
+}
+```
+
+### ☺︎ a/t
+
+(6,9)를 하나의 순서쌍이라고 생각하고
+
+1. %2 == 0일 경우엔 짝수이므로 한 세트만 있어도 된다.
+2. %2 == 1일 경우엔 6과 9의 개수가 홀수이므로, 하나는 무조건 더 필요하다. 따라서 **sum/2 +1**개 필요하다.
+3. 다만 다른 테스트 케이스는 통과하나 `12635` 에서 실패한다.
+    1. 왜냐하면, **maxval**이 1이고, 6이 1개이므로 sum도 1 따라서 1/2+1 1이 되어 2개가 출력된다.
+
+    ```java
+    if (sum == 1) {
+                result = maxval;
+            }
+    ```
+
+4. 그럼 이 조건을 추가해주니까 답이 나온다.
+    1. 코드가 갈수록 난해해지고 있다. 분명이 더 간결하게 풀 수 있을 것 같은데, 우선 구현에 목표를 두고 성능은 성공 후에 생각해본다.
+
+### 반례
+
+1. maxval + sum 한 것이 문제
+    1. 122266669
+        1. 총 3세트만 있어도 되는데, 6세트가 나옴
+
+> 3차
+>
+
+```java
+public class Main3 {
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        String size = sc.nextLine();
+        int[] arr = new int[size.length()];
+        int[] count = new int[10];
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = Integer.parseInt(String.valueOf(size.charAt(i)));
+            count[arr[i]]++;
+        }
+
+        //최댓값
+        int maxval = 0;
+        int sum = 0;
+
+        for (int k = 0; k < count.length; k++) {
+            if (k != 6 && k != 9) {
+                maxval = Math.max(count[k], maxval);
+            }
+        }
+        for (int j = 0; j < arr.length; j++) {
+            if (arr[j] == 6 || arr[j] == 9) {
+                sum++;
+            }
+        }
+
+        int result = 0;
+        // 6 9 개수 판단
+        if (sum % 2 == 0) {
+            result = sum / 2;
+        } else {
+            result = sum / 2 + 1;
+        }
+        int answer = Math.max(result, maxval);
+        System.out.println(answer);
+    }
+}
+```
+
+1. Count 배열에 6, 9를 제외한 개수 카운팅
+2. 6과 9는 한 쌍을 1개로 취급하기 때문에 sum에 6, 9의 개수만큼 저장
+    1. 6, 9가 홀수라면 sum / 2 + 1 세트 필요
+    2. 짝수라면 sum / 2세트 필요
+3. 여기서 0 ~ 9는 한 세트이기 때문에, Math.max를 사용해 최댓값을 구해야 함
+    1. 만약 **122266669라면 →  총 3세트, 처음에 max + sum을 더해서 6세트가 출력되어 틀렸었다.**
+
+---
