@@ -2,10 +2,10 @@
 title: Subeen Jeon Here
 description: This is my dev log.
 url: https://subeenjeonhere.github.io
-avatar: /spm.jpeg
+avatar: /bg.jpeg
 paginate: 5
 permalink: pretty
-cover_image: /scf.jpeg
+cover_image: /spm.jpeg
 
 # Gems
 plugins:
