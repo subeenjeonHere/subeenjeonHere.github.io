@@ -319,3 +319,96 @@ class Solution {
     }
 }
 ```
+---
+
+### ☻ 자릿수 더하기
+
+2024년 2월 21일
+
+### **문제 설명**
+
+자연수 N이 주어지면, N의 각 자릿수의 합을 구해서 return 하는 solution 함수를 만들어 주세요.
+
+예를들어 N = 123이면 1 + 2 + 3 = 6을 return 하면 됩니다.
+
+### 제한사항
+
+- N의 범위 : 100,000,000 이하의 자연수
+
+---
+
+### 입출력 예
+
+| N | answer |
+| --- | --- |
+| 123 | 6 |
+| 987 | 24 |
+
+### ☻ Snippets
+
+```java
+import java.util.*;
+
+public class Solution {
+    public int solution(int n) {
+        int answer = 0;
+
+        String str = String.valueOf(n);
+        String[] arr = new String[str.length()];
+        int sum = 0;
+        for(int i=0; i<arr.length; i++){
+            arr[i] = String.valueOf(str.charAt(i));
+            sum += Integer.parseInt(arr[i]);
+        }
+        answer = sum;
+
+        return answer;
+    }
+}
+```
+
+---
+
+### ☻  나머지가 1이 되는 수
+
+2024년 2월 21일
+
+### **문제 설명**
+
+자연수 `n`이 매개변수로 주어집니다. `n`을 `x`로 나눈 나머지가 1이 되도록 하는 가장 작은 자연수 `x`를 return 하도록 solution 함수를 완성해주세요. 답이 항상 존재함은 증명될 수 있습니다.
+
+---
+
+### 제한사항
+
+- 3 ≤ `n` ≤ 1,000,000
+
+---
+
+### 입출력 예
+
+| n | result |
+| --- | --- |
+| 10 | 3 |
+| 12 | 11 |
+
+# ☺︎ Snippets
+
+```java
+class Solution {
+    public int solution(int n) {
+        int answer = 0;
+        int x =1;
+
+        for(int i=0; i<= n; i++){
+            if(n%x ==1){
+                answer = x;
+                return answer;
+            }else{
+                x++;
+            }
+        }
+        return answer;
+    }
+}
+```
