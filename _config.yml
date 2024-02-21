@@ -5,7 +5,7 @@ url: https://subeenjeonhere.github.io
 avatar: /spm.jpeg
 paginate: 5
 permalink: pretty
-cover_image: /bg.jpeg
+cover_image: /scf.jpeg
 
 # Gems
 plugins:
@@ -61,6 +61,6 @@ author:
 
 # Outputting
 permalink: /:categories/:title/
-paginate: 15                              
+paginate: 15
 paginate_path: /page:num/
 timezone: # https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
