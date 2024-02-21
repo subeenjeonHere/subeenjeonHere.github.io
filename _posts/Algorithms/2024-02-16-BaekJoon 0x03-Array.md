@@ -15,8 +15,8 @@ tags:
 |:------:|:-----:|:------------------:|
 | 연습 문제  | 10808 | [알파벳 개수](#-알파벳-개수) |
 | 기본 문제✔ | 2577  | [숫자의 개수](#-숫자의-개수) |
-| 기본 문제✔ | 1475  |      [방 번호]()      |
-| 기본 문제✔ | 3273  |     [두 수의 합]()     |
+| 기본 문제✔ | 1475  |   [방 번호](#-방-번호)   |
+| 기본 문제✔ | 3273  | [두 수의 합](#-두-수의-합) |
 | 기본 문제  | 10807 |     [개수 세기]()      |
 | 기본 문제  | 13300 |      [방 배정]()      |
 | 기본 문제  | 11328 |     [Strfry]()     |
@@ -243,7 +243,7 @@ public class Main {
 }
 ```
 
-```jsx
+```
 workspace / back_joon / out / production / ct
 back_joon.x03배열.숫자의개수.Main
 150
@@ -266,7 +266,7 @@ back_joon.x03배열.숫자의개수.Main
 
 0~9까지를 카운팅하기 위한 배열의 길이는 10이 되어야 한다.
 
-```java
+```
 int[] cnt = new int[10];
 ```
 
@@ -274,20 +274,20 @@ int[] cnt = new int[10];
 
 ---
 
-
-### ☻ 방 번호
+# ☻ 방 번호
 
 2024년 2월 16일 2024년 2월 21일
 
-| 시간 제한 | 메모리 제한 | 제출 | 정답 | 맞힌 사람 | 정답 비율 |
-| --- | --- | --- | --- | --- | --- |
-| 2 초 | 128 MB | 65801 | 29916 | 22385 | 44.096% |
+| 시간 제한 | 메모리 제한 | 제출    | 정답    | 맞힌 사람 | 정답 비율   |
+|-------|--------|-------|-------|-------|---------|
+| 2 초   | 128 MB | 65801 | 29916 | 22385 | 44.096% |
 
 ## 문제
 
-다솜이는 은진이의 옆집에 새로 이사왔다. 다솜이는 자기 방 번호를 예쁜 플라스틱 숫자로 문에 붙이려고 한다.
+다솜이는 은진이의 옆집에 새로 이사왔다. 다솜이는 자기 방 번호를 예쁜 플라스틱 숫자로 문에 붙이려고 한다.
 
-다솜이의 옆집에서는 플라스틱 숫자를 한 세트로 판다. 한 세트에는 0번부터 9번까지 숫자가 하나씩 들어있다. 다솜이의 방 번호가 주어졌을 때, 필요한 세트의 개수의 최솟값을 출력하시오. (6은 9를 뒤집어서 이용할 수 있고, 9는 6을 뒤집어서 이용할 수 있다.)
+다솜이의 옆집에서는 플라스틱 숫자를 한 세트로 판다. 한 세트에는 0번부터 9번까지 숫자가 하나씩 들어있다. 다솜이의 방 번호가 주어졌을 때, 필요한 세트의 개수의 최솟값을 출력하시오. (6은 9를 뒤집어서 이용할
+수 있고, 9는 6을 뒤집어서 이용할 수 있다.)
 
 ## 입력
 
@@ -309,41 +309,6 @@ int[] cnt = new int[10];
 2
 ```
 
-## 예제 입력 2
-
-```
-122
-```
-
-## 예제 출력 2
-
-```
-2
-```
-
-## 예제 입력 3
-
-```
-12635
-```
-
-## 예제 출력 3
-
-```
-1
-```
-
-## 예제 입력 4
-
-```
-888888
-```
-
-## 예제 출력 4
-
-```
-6
-```
 
 # ☺︎ a/t
 
@@ -376,11 +341,7 @@ int[] cnt = new int[10];
 > 1차
 >
 
-```sql
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-
+```java
 public class Main {
     public static void main(String[] args) throws IOException {
 
@@ -391,7 +352,8 @@ public class Main {
         int[] arr = new int[10];
         for (int i = 0; i < arr.length; i++) {
             arr[i] = n;
-            n++;
+            n
+                    ++;
         }
         int num = Integer.parseInt(br.readLine());
         char[] chars = String.valueOf(num).toCharArray();
@@ -407,9 +369,10 @@ public class Main {
 
         int idx = 0;
         int count = 0;
-        while (idx < chars.length) {
+        while
+        (idx < chars.length) {
             if (chars[idx] == '9' && chars[idx] == '6') {
-                
+
                 count++;
             }
             idx++;
@@ -479,11 +442,12 @@ public class Main2 {
 3. 다만 다른 테스트 케이스는 통과하나 `12635` 에서 실패한다.
     1. 왜냐하면, **maxval**이 1이고, 6이 1개이므로 sum도 1 따라서 1/2+1 1이 되어 2개가 출력된다.
 
-    ```java
+```
+   
     if (sum == 1) {
                 result = maxval;
             }
-    ```
+```
 
 4. 그럼 이 조건을 추가해주니까 답이 나온다.
     1. 코드가 갈수록 난해해지고 있다. 분명이 더 간결하게 풀 수 있을 것 같은데, 우선 구현에 목표를 두고 성능은 성공 후에 생각해본다.
@@ -544,6 +508,175 @@ public class Main3 {
     1. 6, 9가 홀수라면 sum / 2 + 1 세트 필요
     2. 짝수라면 sum / 2세트 필요
 3. 여기서 0 ~ 9는 한 세트이기 때문에, Math.max를 사용해 최댓값을 구해야 함
-    1. 만약 **122266669라면 →  총 3세트, 처음에 max + sum을 더해서 6세트가 출력되어 틀렸었다.**
+    1. 만약 **122266669라면 → 총 3세트, 처음에 max + sum을 더해서 6세트가 출력되어 틀렸었다.**
+
+---
+
+# ☻ 두 수의 합
+
+2024년 2월 21일
+
+| 시간 제한 | 메모리 제한 | 제출    | 정답    | 맞힌 사람 | 정답 비율   |
+|-------|--------|-------|-------|-------|---------|
+| 1 초   | 128 MB | 52233 | 18726 | 13859 | 34.714% |
+
+## 문제
+
+n개의 서로 다른 양의 정수 a1, a2, ..., an으로 이루어진 수열이 있다. ai의 값은 1보다 크거나 같고, 1000000보다 작거나 같은 자연수이다. 자연수 x가 주어졌을 때, ai + aj = x (
+1 ≤ i < j ≤ n)을 만족하는 (ai, aj)쌍의 수를 구하는 프로그램을 작성하시오.
+
+## 입력
+
+첫째 줄에 수열의 크기 n이 주어진다. 다음 줄에는 수열에 포함되는 수가 주어진다. 셋째 줄에는 x가 주어진다. (1 ≤ n ≤ 100000, 1 ≤ x ≤ 2000000)
+
+## 출력
+
+문제의 조건을 만족하는 쌍의 개수를 출력한다.
+
+## 예제 입력 1
+
+```
+9
+5 12 7 10 9 1 2 3 11
+13
+```
+
+## 예제 출력 1
+
+```
+3
+```
+
+---
+
+# ☺︎ Snippets
+
+> 1차
+>
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        //배열 생성
+        int[] arr = new int[n];
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = sc.nextInt();
+        }
+        int x = sc.nextInt();
+        int cnt = 0;
+        // a + b = x인 순서쌍 구하기, a < b
+        for (int i = 0; i < arr.length - 1; i++) {
+            for (int j = i + 1; j < arr.length; j++) {
+                if (arr[i] + arr[j] == x) {
+                    cnt++;
+                }
+            }
+        }
+        System.out.println(cnt);
+    }
+}
+```
+
+시간초과
+
+이중 For문으로 풀으라고 낸 문제가 아닌 것 같다. **투 포인터로** 풀어야 한다.
+
+> 2차
+>
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        //배열 생성
+        int[] arr = new int[n];
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = sc.nextInt();
+        }
+        //X 입력받기
+        int x = sc.nextInt();
+
+        //ASC 정렬
+        Arrays.sort(arr);
+
+        int cnt = 0;
+        int start = 0;
+        int end = arr.length - 1;
+        while (end > arr.length / 2) {
+            if (arr[start] + arr[end] == x) {
+                System.out.println("End:" + end);
+                System.out.println(arr[start] + " " + arr[end]);
+                cnt++;
+                end--;
+            } else if (arr[start] + arr[end] < x) {
+                start++;
+            } else if (arr[start] + arr[end] > x) {
+                end--;
+            }
+        }
+
+        System.out.println(cnt);
+    }
+}
+
+```
+
+`(1 ≤ i < j ≤ n)` 문제 조건에선 **i와 j가 같을 수 없다. 그리고 서로 다른 양의 정수다.**
+
+### 반례
+
+도저히 안 풀려서 왜 안되는지 생각해보다가 랜덤으로 수를 만들어서 넣어봤는데, 이게 반례인 듯 하다.
+
+```
+5
+13 23 2 90 3
+113
+```
+
+```
+End:4
+23 90
+
+End:3
+90 23
+2
+```
+
+원래 답은 1이 나와야 하는데 2개다. 왜냐면 **중복이 되었기 때문.**
+
+> 3차 성공
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        //ASC 정렬
+        Arrays.sort(arr);
+
+        int cnt = 0;
+        int start = 0;
+        int end = arr.length - 1;
+        while (start < end) {
+            if (arr[start] + arr[end] == x) {
+                cnt++;
+                end--;
+            } else if (arr[start] + arr[end] < x) {
+                start++;
+            } else if (arr[start] + arr[end] > x) {
+                System.out.println("Start:" + start + "// End:" + end);
+                end--;
+            }
+        }
+        System.out.println(cnt);
+    }
+}
+```
+
+투 포인터 알고리즘을 사용할 때 시작점(start)과 끝점(end)의 위치 설정을 잘못했기 때문이다. 그리고 1,2차때 풀었던 것처럼 start와 end를 동일하게 주고 증가시키는 게 아니라, ASC 정렬하고
+중간으로 좁혀나가야 한다
+
+시간 904ms, BufferdReader 사용했으면 더 빨랐을 듯하다.
 
 ---
