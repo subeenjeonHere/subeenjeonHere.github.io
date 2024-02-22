@@ -680,3 +680,103 @@ public class Main {
 시간 904ms, BufferdReader 사용했으면 더 빨랐을 듯하다.
 
 ---
+
+
+# ☻ 개수 세기
+
+2024년 2월 22일
+
+| 시간 제한 | 메모리 제한 | 제출 | 정답 | 맞힌 사람 | 정답 비율 |
+| --- | --- | --- | --- | --- | --- |
+| 1 초 | 256 MB | 111569 | 68962 | 59011 | 62.783% |
+
+## 문제
+
+총 N개의 정수가 주어졌을 때, 정수 v가 몇 개인지 구하는 프로그램을 작성하시오.
+
+## 입력
+
+첫째 줄에 정수의 개수 N(1 ≤ N ≤ 100)이 주어진다. 둘째 줄에는 정수가 공백으로 구분되어져있다. 셋째 줄에는 찾으려고 하는 정수 v가 주어진다. 입력으로 주어지는 정수와 v는 -100보다 크거나 같으며, 100보다 작거나 같다.
+
+## 출력
+
+첫째 줄에 입력으로 주어진 N개의 정수 중에 v가 몇 개인지 출력한다.
+
+## 예제 입력 1
+
+```
+11
+1 4 1 2 4 2 4 2 3 4 4
+2
+```
+
+## 예제 출력 1
+
+```
+3
+
+```
+
+## 예제 입력 2
+
+```
+11
+1 4 1 2 4 2 4 2 3 4 4
+5
+```
+
+## 예제 출력 2
+
+```
+0
+```
+
+---
+
+# ☺︎ a/t
+
+```java
+For input string: "1 4 1 2 4 2 4 2 3 4 4"
+```
+
+br.readLine()으로 입력받으려 할 때 발생한 에러인데, 원인은 **공백이 포함**되어 있기 때문에 숫자로 변환해야 하는 문자열이 실제로 숫자가 아니기 때문. → "1 4 1 2 4 2 4 2 3 4 4"를 공백으로 분리한 후 각각을 숫자로 변환해야 한다.
+
+---
+
+# ☺︎ Snippets
+
+```java
+public class Main {
+    public static void main(String[] args) throws IOException {
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        // n 입력
+        int n = Integer.parseInt(br.readLine());
+
+        //토큰 입력
+        int[] arr = new int[n];
+        String[] strings;
+        strings = br.readLine().split(" ");
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = Integer.parseInt(strings[i]);
+        }
+
+        // v 입력받기
+        int v = Integer.parseInt(br.readLine());
+        // 0부터 배열 순회하며 v와 같다면 cnt 증가
+        int cnt = 0;
+        int start = 0;
+        while (start < arr.length) {
+            if (arr[start] == v) cnt++;
+            start++;
+        }
+        System.out.println(cnt);
+        br.close();
+    }
+}
+```
+
+스캐너로 풀었을 때보다 시간이 두 배 정도 단축되었다.
+
+---
