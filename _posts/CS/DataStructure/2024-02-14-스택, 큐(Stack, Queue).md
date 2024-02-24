@@ -9,6 +9,8 @@ tags:
   ]
 ---
 
+
+
 # ☻ Stack (스택)
 
 1. 들어온 시간 순으로 데이터를 쌓아갈 때, 가장 위 (가장 최근에 삽입)에 있는 데이터를 삭제하거나, 거기에 이어서 새로운 데이터를 삽입할 수 있도록 하는 선형 자료구조.
@@ -63,3 +65,60 @@ public class Stack {
 
 ---
 
+# ☻ Queue (큐)
+
+스택과는 달리 한 쪽에서는 데이터 삽입, 다른 한 쪽에서는 데이터의 삭제만 가능한 **FIFO(First-In First-Out)**의 구조를 가지는 선형 데이터 구조. 즉, 먼저 들어간 것이 먼저 나온다.
+
+## 큐 구성도
+
+![image](https://github.com/subeenjeonHere/subeenjeonHere.github.io/assets/145312273/4046bba2-a83a-415d-9a3f-e0cd6996e6e8)
+
+- 삭제 연산이 수행되는 곳을 프론트(Front), 삽입 연산이 수행되는 곳을 리어(Rear)라고 칭한다.
+- 프론트에서 이뤄지는 삭제 연산을 디큐(Dequeue), 리어에서 이뤄지는 삽입 연산을 인큐(Enqueue)라고 칭한다.
+
+## 큐의 연산
+
+| 연산 | 설명 |
+| --- | --- |
+| Enqueue(), Add(), Offer() | 항목을 큐의 뒤쪽에 추가 |
+| Dequeue() | 큐의 앞에서 항목을 제거하고 반환 |
+| Front(), Front() | 제거하지 않고, 큐의 앞에 있는 요소를 확인 |
+| IsEmpty() | 큐가 비어있는 경우 true를 반환 |
+| IsFull() | 큐가 가득 찬 경우 true를 반환 |
+| Rear() | 제거하지 않고, 큐의 뒤쪽 끝에 있는 요소를 반환 |
+
+## 큐 구현
+
+```java
+import java.util.LinkedList;
+import java.util.Queue;
+
+public class Main {
+  public static void main(String[] args) {
+    Queue<Integer> queue = new LinkedList<>();
+
+    // 큐에 데이터 추가
+    for(int i=0; i<5; i++) {
+      queue.add(i);
+    }
+
+    // 큐에 있는 요소 확인
+    System.out.println("Elements in Queue: " + queue);
+
+    // 큐에서 데이터 제거
+    int removed = queue.remove();
+    System.out.println("removed element: " + removed);
+
+    System.out.println(queue);
+
+    // 큐에 있는 요소 확인
+    int head = queue.peek();
+    System.out.println("head of queue: " + head);
+
+    // 큐 크기 확인
+    int size = queue.size();
+    System.out.println("Size of queue: " + size);
+  }
+}
+
+```
