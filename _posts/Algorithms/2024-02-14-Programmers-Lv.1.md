@@ -412,3 +412,119 @@ class Solution {
     }
 }
 ```
+
+---
+
+### ☻ 자릿수 더하기
+
+2024년 2월 21일
+
+### **문제 설명**
+
+자연수 N이 주어지면, N의 각 자릿수의 합을 구해서 return 하는 solution 함수를 만들어 주세요.
+
+예를들어 N = 123이면 1 + 2 + 3 = 6을 return 하면 됩니다.
+
+### 제한사항
+
+- N의 범위 : 100,000,000 이하의 자연수
+
+---
+
+### 입출력 예
+
+| N | answer |
+| --- | --- |
+| 123 | 6 |
+| 987 | 24 |
+
+### ☻ Snippets
+
+```java
+import java.util.*;
+
+public class Solution {
+    public int solution(int n) {
+        int answer = 0;
+
+        String str = String.valueOf(n);
+        String[] arr = new String[str.length()];
+        int sum = 0;
+        for(int i=0; i<arr.length; i++){
+            arr[i] = String.valueOf(str.charAt(i));
+            sum += Integer.parseInt(arr[i]);
+        }
+        answer = sum;
+
+        return answer;
+    }
+}
+```
+---
+
+### ☻ 자릿수 뒤집어 배열로 만들기
+
+2024년 2월 24일
+
+### **문제 설명**
+
+자연수 n을 뒤집어 각 자리 숫자를 원소로 가지는 배열 형태로 리턴해주세요. 예를들어 n이 12345이면 [5,4,3,2,1]을 리턴합니다.
+
+### 제한 조건
+
+- n은 10,000,000,000이하인 자연수입니다.
+
+### 입출력 예
+
+| n | return |
+| --- | --- |
+| 12345 | [5,4,3,2,1] |
+
+---
+
+# ☺︎ a/t
+
+- long n 의 각 자릿수를 answer 배열에 넣고, reverse
+   - long을 int로 Casting girl
+   - (int)
+
+    ```jsx
+    long x = 11L;
+    int xInt = x.intValue();
+    ```
+
+   - 각 자릿수를 charAt처럼 추출하기
+   - 이를 배열에 넣고 역순으로 정렬하기
+   - 혹은 Stream 사용
+
+# ☻ Snippets
+
+```jsx
+import java.util.*;
+class Solution {
+    public int[] solution(long n) {
+        
+        String strings = String.valueOf(n);
+        
+        int[] answer = new int[strings.length()];
+        
+        for(int i=0; i<answer.length; i++){
+            answer[i] = strings.charAt(i) -'0';
+        }
+
+        // 배열 뒤집기, 콜렉션 말고 for문으로 뒤집기
+        for(int i=0; i < answer.length / 2; i++){
+            int temp;
+            temp = answer[i];
+            // 0 4, 1 3
+        
+            answer[i] = answer[answer.length-1-i];
+            answer[answer.length-1-i] = temp;
+        }
+ 
+        return answer;
+    }
+}
+```
+
+Collection.reverse(answer);로 풀 수도 있었으나 일단 기본적인 것부터 짚고 넘어가려고 for문 사용
