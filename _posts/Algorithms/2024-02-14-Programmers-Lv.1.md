@@ -840,3 +840,121 @@ i가 n의 약수일 때는 같다.
 이게 문제였다. i가 int였으니, 당연히 long 값이 들어왔을 때 실패한다.
 
 아무튼 타입의 문제였고 솔..
+
+---
+
+### ☻ 정수 내림차순 배치하기
+
+2024년 2월 25일
+
+### **문제 설명**
+
+함수 solution은 정수 n을 매개변수로 입력받습니다. n의 각 자릿수를 큰것부터 작은 순으로 정렬한 새로운 정수를 리턴해주세요. 예를들어 n이 118372면 873211을 리턴하면 됩니다.
+
+### 제한 조건
+
+- `n`은 1이상 8000000000 이하인 자연수입니다.
+
+### 입출력 예
+
+| n | return |
+| --- | --- |
+| 118372 | 873211 |
+
+---
+
+### ☺︎ a/t
+
+String으로 변환후, 각 charAt으로 원소 추출 → long 배열에 저장 → Arrays.sort → reverse
+
+### ☺︎ Snippets
+
+```jsx
+import java.util.*;
+
+class Solution {
+    public long solution(long n) {
+        long answer = 0;
+
+        String num = String.valueOf(n);
+        int[] arr = new int[num.length()];
+        StringBuilder sb = new StringBuilder();
+        
+        for(int i=0; i<arr.length; i++){
+            arr[i] = Integer.parseInt(String.valueOf(num.charAt(i)));
+        }
+
+        Arrays.sort(arr);
+        for(int i=0; i < arr.length/2; i++){
+            int temp = 0;
+            temp = arr[i];
+            arr[i]=arr[arr.length-i-1];
+            arr[arr.length-i-1] = temp;
+        }
+        for(int i=0; i<arr.length; i++){
+            // sb.append(arr[i]);
+            sb.append(arr[i]);
+        }
+        return Long.valueOf(sb.toString());
+
+    }
+}
+```
+
+---
+
+### ☻ 제일 작은 수 제거하기
+
+2024년 2월 25일
+
+### **문제 설명**
+
+정수를 저장한 배열, arr 에서 가장 작은 수를 제거한 배열을 리턴하는 함수, solution을 완성해주세요. 단, 리턴하려는 배열이 빈 배열인 경우엔 배열에 -1을 채워 리턴하세요. 예를들어 arr이 [4,3,2,1]인 경우는 [4,3,2]를 리턴 하고, [10]면 [-1]을 리턴 합니다.
+
+### 제한 조건
+
+- arr은 길이 1 이상인 배열입니다.
+- 인덱스 i, j에 대해 i ≠ j이면 arr[i] ≠ arr[j] 입니다.
+
+### 입출력 예
+
+| arr | return |
+| --- | --- |
+| [4,3,2,1] | [4,3,2] |
+| [10] | [-1] |
+
+---
+
+### ☺︎ a/t
+
+배열에서 최솟값을 찾음.
+
+그리고 스택에 Push하며 최솟값을 만나면 조건문으로 탈출
+
+```jsx
+import java.util.*;
+class Solution {
+    public Stack<Integer> solution(int[] arr) {
+        int[] answer = {};
+        int min= arr[0];
+        
+        for(int i=0; i<arr.length; i++){
+            if(min>arr[i]){
+                min = arr[i];
+            }
+        }
+        Stack<Integer> stack = new Stack<>();
+        if(arr.length==1){
+            stack.push(-1);
+            return stack;
+        }
+        for(int i=0; i<arr.length; i++){
+            if(min == arr[i]){
+                continue;
+            }
+            stack.push(arr[i]);
+        }
+        return stack;
+    }
+}
+```
