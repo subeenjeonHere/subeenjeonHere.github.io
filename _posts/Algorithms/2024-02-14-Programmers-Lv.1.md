@@ -863,10 +863,6 @@ i가 n의 약수일 때는 같다.
 
 ---
 
-### ☺︎ a/t
-
-String으로 변환후, 각 charAt으로 원소 추출 → long 배열에 저장 → Arrays.sort → reverse
-
 ### ☺︎ Snippets
 
 ```jsx
@@ -927,9 +923,7 @@ class Solution {
 
 ### ☺︎ a/t
 
-배열에서 최솟값을 찾음.
-
-그리고 스택에 Push하며 최솟값을 만나면 조건문으로 탈출
+배열에서 최솟값을 찾고  스택에 Push하며 최솟값을 만나면 조건문으로 탈출
 
 ```jsx
 import java.util.*;
