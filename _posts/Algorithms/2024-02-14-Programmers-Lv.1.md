@@ -9,6 +9,9 @@ tags:
   ]
 ---
 
+
+---
+
 # [Programmers](https://school.programmers.co.kr/)
 
 # ☻ 같은 숫자는 싫어
@@ -1047,6 +1050,193 @@ class Solution {
             }
         }
         return answer;
+    }
+}
+```
+---
+### ☻ 두 정수 사이의 합
+
+2024년 2월 26일
+
+### **문제 설명**
+
+두 정수 a, b가 주어졌을 때 a와 b 사이에 속한 모든 정수의 합을 리턴하는 함수, solution을 완성하세요.
+
+예를 들어 a = 3, b = 5인 경우, 3 + 4 + 5 = 12이므로 12를 리턴합니다.
+
+### 제한 조건
+
+- a와 b가 같은 경우는 둘 중 아무 수나 리턴하세요.
+- a와 b는 -10,000,000 이상 10,000,000 이하인 정수입니다.
+- a와 b의 대소관계는 정해져있지 않습니다.
+
+### 입출력 예
+
+| a | b | return |
+| --- | --- | --- |
+| 3 | 5 | 12 |
+| 3 | 3 | 3 |
+| 5 | 3 | 12 |
+
+### ☺︎ at
+
+- while 문으로 a ≤ b 까지 범위 지정 후, a ++ 1씩 증가
+- sum += 누적 합
+
+### ☺︎ Snippets
+
+```jsx
+class Solution {
+    public long solution(int a, int b) {
+        long answer = 0;
+        
+        if(a<b){
+            while(a<=b){
+            answer += a;
+            a++;
+            }
+        } else{
+            while(b<=a){
+                answer +=b;
+                b++;
+            }
+        }
+        
+        return answer;
+    }
+}
+```
+---
+
+### ☻ 두 정수 사이의 합
+
+2024년 2월 26일
+
+### **문제 설명**
+
+두 정수 a, b가 주어졌을 때 a와 b 사이에 속한 모든 정수의 합을 리턴하는 함수, solution을 완성하세요.
+
+예를 들어 a = 3, b = 5인 경우, 3 + 4 + 5 = 12이므로 12를 리턴합니다.
+
+### 제한 조건
+
+- a와 b가 같은 경우는 둘 중 아무 수나 리턴하세요.
+- a와 b는 -10,000,000 이상 10,000,000 이하인 정수입니다.
+- a와 b의 대소관계는 정해져있지 않습니다.
+
+### 입출력 예
+
+| a | b | return |
+| --- | --- | --- |
+| 3 | 5 | 12 |
+| 3 | 3 | 3 |
+| 5 | 3 | 12 |
+
+### ☺︎ at
+
+- while 문으로 a ≤ b 까지 범위 지정 후, a ++ 1씩 증가
+- sum += 누적 합
+
+### ☺︎ Snippets
+
+```jsx
+class Solution {
+    public long solution(int a, int b) {
+        long answer = 0;
+        
+        if(a<b){
+            while(a<=b){
+            answer += a;
+            a++;
+            }
+        } else{
+            while(b<=a){
+                answer +=b;
+                b++;
+            }
+        }
+        
+        return answer;
+    }
+}
+```
+
+---
+
+### ☻ 콜라츠 추측
+
+2024년 2월 26일
+
+### **문제 설명**
+
+1937년 Collatz란 사람에 의해 제기된 이 추측은, 주어진 수가 1이 될 때까지 다음 작업을 반복하면, 모든 수를 1로 만들 수 있다는 추측입니다. 작업은 다음과 같습니다.
+
+```jsx
+1-1. 입력된 수가 짝수라면 2로 나눕니다. 
+1-2. 입력된 수가 홀수라면 3을 곱하고 1을 더합니다. 
+2. 결과로 나온 수에 같은 작업을 1이 될 때까지 반복합니다.
+```
+
+예를 들어, 주어진 수가 6이라면 6 → 3 → 10 → 5 → 16 → 8 → 4 → 2 → 1 이 되어 총 8번 만에 1이 됩니다. 위 작업을 몇 번이나 반복해야 하는지 반환하는 함수, solution을 완성해 주세요. 단, 주어진 수가 1인 경우에는 0을, 작업을 500번 반복할 때까지 1이 되지 않는다면 –1을 반환해 주세요.
+
+### 제한 사항
+
+- 입력된 수, `num`은 1 이상 8,000,000 미만인 정수입니다.
+
+### 입출력 예
+
+| n | result |
+| --- | --- |
+| 6 | 8 |
+| 16 | 4 |
+| 626331 | -1 |
+
+### 입출력 예 설명
+
+입출력 예 #1
+
+문제의 설명과 같습니다.
+
+입출력 예 #2
+
+16 → 8 → 4 → 2 → 1 이 되어 총 4번 만에 1이 됩니다.
+
+입출력 예 #3
+
+626331은 500번을 시도해도 1이 되지 못하므로 -1을 리턴해야 합니다.
+
+### ☺︎ Snippets
+
+```jsx
+class Solution {
+    public int solution(int num) {
+        int answer = 0;
+        long longNum = (long) num;
+        int sum = 0;
+        
+        while(longNum !=1){
+            if(longNum%2==0){
+                longNum = isEven(longNum);
+                sum++;
+            }else{
+                longNum = isOdd(longNum);
+                sum++;
+            }
+            if(sum > 500){
+                return -1;
+            }            
+    }
+    
+         answer = sum;
+        return answer;
+    }    
+    static long isEven(long n ){
+        long i = n/2;
+        return i;
+    }
+    static long isOdd(long n ){
+        long i = n*3+1;
+        return i;
     }
 }
 ```
