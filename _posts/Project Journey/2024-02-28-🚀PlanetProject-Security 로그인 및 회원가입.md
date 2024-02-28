@@ -132,19 +132,12 @@ formLogin의 `usernameParameter`는 기본적으로 name을 사용하도록 되�
 
 ```jsx
 @PostMapping("/user/registerpro")
-public
-String
-register(@ModelAttribute("registrationRequest")
-RegistrationRequest
-registrationRequest, Model
-model
-)
-{
-    logger.info("Processing register");
-    logger.info("User name={}, email={} ", registrationRequest.getUsername(), registrationRequest.getEmail());
-    model.addAttribute("registrationRequest", registrationRequest);
-    userService.register(registrationRequest);
-    return "redirect:/main";
+public String register(@ModelAttribute("registrationRequest") RegistrationRequest registrationRequest, Model model) {
+  logger.info("Processing register");
+  logger.info("User name={}, email={} ", registrationRequest.getUsername(), registrationRequest.getEmail());
+  model.addAttribute("registrationRequest", registrationRequest);
+  userService.register(registrationRequest);
+  return "redirect:/main";
 }
 ```
 
@@ -158,19 +151,13 @@ model
 
 ```jsx
 @Override
-public
-void register(RegistrationRequest
-registrationRequest
-)
-{
-    User
-    user = new User();
-    long
-    checkUser = userRepository.countByEmail(registrationRequest.getEmail());
-    if (checkUser == 0)
-        BeanUtils.copyProperties(registrationRequest, user);
-    user.setPassword(bCryptPasswordEncoder.encode(registrationRequest.getPassword()));
-    userRepository.save(user);
+public void register(RegistrationRequest registrationRequest) {
+  User user = new User();
+  long checkUser = userRepository.countByEmail(registrationRequest.getEmail());
+  if (checkUser == 0)
+    BeanUtils.copyProperties(registrationRequest, user);
+  user.setPassword(bCryptPasswordEncoder.encode(registrationRequest.getPassword()));
+  userRepository.save(user);
 }
 ```
 
@@ -207,24 +194,14 @@ registrationRequest
 
 ```jsx
 @PostMapping("/user/loginpro")
-public
-String
-loginUser(User
-user, HttpServletRequest
-request, Model
-model
-)
-{
-    logger.info("Login Processing");
-    appUserService.loadUserByUsername(user.getEmail());
-    HttpSession
-    session = request.getSession();
-    String
-    username = (String)
-    session.getAttribute("username");
-    session.setAttribute("username", username);
-    model.addAttribute("session", session);
-    return "redirect:/main";
+public String loginUser(User user, HttpServletRequest request, Model model) {
+  logger.info("Login Processing");
+  appUserService.loadUserByUsername(user.getEmail());
+  HttpSession session = request.getSession();
+  String username = (String) session.getAttribute("username");
+  session.setAttribute("username", username);
+  model.addAttribute("session", session);
+  return "redirect:/main";
 }
 ```
 
@@ -240,21 +217,13 @@ model
 
 ```jsx
 @Override
-public
-UserDetails
-loadUserByUsername(String
-email
-)
-throws
-UsernameNotFoundException
-{
+public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
-    User
-    user = userRepository.findUserByEmail(email)
-        .orElseThrow(() -> new UsernameNotFoundException(USER_NOT_FOUND));
-    // revise
-    return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword()
-        , getAuthorities(user));
+  User user = userRepository.findUserByEmail(email)
+          .orElseThrow(() -> new UsernameNotFoundException(USER_NOT_FOUND));
+  // revise
+  return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword()
+          , getAuthorities(user));
 }
 ```
 
