@@ -42,7 +42,10 @@ tags:
 
 ![image](https://github.com/subeenjeonHere/subeenjeonHere.github.io/assets/145312273/7eddd095-6356-486b-a348-53fc5e8693bf)
 
+
 > Security를 사용해야하나 말아야 하나 고민했다. ~~(배보다 배꼽이 클까봐..?)~~
+ 
+
 ---
 
 # ☺︎ Spring SecurityConfig 파일 작성하기
