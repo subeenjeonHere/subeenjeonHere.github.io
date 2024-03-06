@@ -183,3 +183,234 @@ public class Main {
 그리고, 누적합 계산 시 호수를 초과하는 경우 계산을 중단하는 로직을 초기화하도록 했다.
 
 ---
+
+# ☻ 소수찾기
+
+2024년 3월 6일
+
+## 문제
+
+주어진 수 N개 중에서 소수가 몇 개인지 찾아서 출력하는 프로그램을 작성하시오.
+
+## 입력
+
+첫 줄에 수의 개수 N이 주어진다. N은 100이하이다. 다음으로 N개의 수가 주어지는데 수는 1,000 이하의 자연수이다.
+
+## 출력
+
+주어진 수들 중 소수의 개수를 출력한다.
+
+## 예제 입력 1
+
+```
+4
+1 3 5 7
+
+10
+1 2 3 4 5 6 7 8 9 10
+```
+
+## 예제 출력 1
+
+```
+3
+```
+
+---
+
+## ☺︎ Snippets
+
+```java
+public class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        int n = Integer.parseInt(br.readLine());
+        int[] arr = new int[n];
+        StringTokenizer stk = new StringTokenizer(br.readLine(), " ");
+
+        int st = 0;
+        int count = 0;
+        while (stk.hasMoreTokens()) {
+            arr[st] = Integer.parseInt(stk.nextToken());
+            System.out.println("Arr:" + arr[st]);
+            if (isPrime(arr[st]) == 1) {
+                count++;
+            }
+            st++;
+        }
+        System.out.println(count);
+    }
+
+    private static int isPrime(int i) {    
+
+        //1은 소수가 아님
+        if (i == 1) {
+            return 0;
+        }
+        if (i == 2) {
+            return 1;
+        }
+        for (int j = 2; j <= Math.sqrt(i); j++) {
+            if (i % j == 0){
+                return 0;
+            }
+        }
+        return 1;
+    }
+}
+
+```
+
+`isPrime()` 함수에서는 입력받은 숫자 `i`가 소수인지 아닌지를 확인한다.
+
+소수는 **1과 자기 자신 이외에는 어떤 수로도 나누어 떨어지지 않는 수**를 말한다. 따라서, 2부터 `i`의 제곱근까지의 수로 `i`를 나누어 보고 나머지가 0인 경우가 있으면 `i`는 소수가 아니므로 0을 반환하고, 그렇지 않으면 `i`는 소수이므로 1을 반환하도록 했다.
+
+### Math.sqrt를 사용한 이유
+
+수학적으로, 어떤 수의 약수는 그 수의 제곱근 이하에 반드시 존재하기 때문이다.
+
+예를 들어, 36의 약수는 1, 2, 3, 4, 6, 9, 12, 18, 36이다. 제곱근은 6이며, 제곱근을 기준으로 약수들이 쌍을 이룬다. 따라서, 소수를 판별할 때는 그 수의 제곱근까지만 확인하면 구할 수 있다.
+
+제곱근 이하의 수들을 나누었을 때, 0으로 나누어 떨어지는 경우가 있으면 그 수가 자기 자신 이외의 다른 약수를 가진다는 것을 의미하므로, 그 수는 소수가 아니다.
+
+---
+
+# ☻ 팰린드롬 수
+
+2024년 3월 6일
+
+## 문제
+
+어떤 단어를 뒤에서부터 읽어도 똑같다면 그 단어를 팰린드롬이라고 한다. 'radar', 'sees'는 팰린드롬이다.
+
+수도 팰린드롬으로 취급할 수 있다. 수의 숫자들을 뒤에서부터 읽어도 같다면 그 수는 팰린드롬수다. 121, 12421 등은 팰린드롬수다. 123, 1231은 뒤에서부터 읽으면 다르므로 팰린드롬수가 아니다. 또한 10도 팰린드롬수가 아닌데, 앞에 무의미한 0이 올 수 있다면 010이 되어 팰린드롬수로 취급할 수도 있지만, 특별히 이번 문제에서는 무의미한 0이 앞에 올 수 없다고 하자.
+
+## 입력
+
+입력은 여러 개의 테스트 케이스로 이루어져 있으며, 각 줄마다 1 이상 99999 이하의 정수가 주어진다. 입력의 마지막 줄에는 0이 주어지며, 이 줄은 문제에 포함되지 않는다.
+
+## 출력
+
+각 줄마다 주어진 수가 팰린드롬수면 'yes', 아니면 'no'를 출력한다.
+
+## 예제 입력 1
+
+```
+121
+1231
+12421
+0
+```
+
+## 예제 출력 1
+
+```
+yes
+no
+yes
+```
+
+---
+
+## ☺︎ Snippets
+
+> 1차 시도
+>
+
+```java
+
+public class Main {
+    public static void main(String[] args) throws IOException {
+        Scanner sc = new Scanner(System.in);
+
+        while (true) {
+            String s = sc.next();
+
+            if (s.equals("0")) {
+                break;
+            }
+
+            //배열 생성
+            String[] strings = new String[s.length()];
+            for (int i = 0; i < strings.length; i++) {
+                strings[i] = String.valueOf(s.charAt(i));
+            }
+
+            // 0 & strings.len-1
+            // 1 & strings.len-2
+            // start  < mid 일 때 까지
+            for (int j = 0; j < strings.length / 2; j++) {
+
+                // 같지 않다면 No 출력하고 종료하기
+                if (!strings[j].equals(strings[strings.length - 1 - j])) {
+                    System.out.println("No");
+                    break;
+                }
+                if (j == strings.length / 2 - 1) {
+                    System.out.println("S  : " + s + " : Yes");
+                }
+              
+            }
+        }
+    }
+}
+```
+
+> 2차 시도
+>
+
+### 실패했던 이유
+
+1. 1자리일 때 고려하지 않았던 것
+2. 제어문을 컨트롤 하는 것
+  1. return, continue, break
+  2. 특히나 1자리일 때 break;을 걸어서, 1자리가 입력되면 전체 메소드가 종료되었다. 1 121 1241 이렇게 올 수 있는 것인데, 바로 프로그램이 종료되었다. 이를 continue로 변경하고 해결
+  3. 또한 팰린드롬 수를 판별하는 For loop에서 문자들을 비교하며, 문자열이 다르면 “no”를 출력하고 break을 걸었다. → 어차피 다르므로 계속 검사할 이유가 없다.
+  4. 그리고 j를 계속 비교해서, break 에 걸리지 않고 len /2-1 까지 도달했다면 전체 비교 완료한 것이므로 yes를 출력한다.
+
+```java
+public class Main {
+    public static void main(String[] args) throws IOException {
+        Scanner sc = new Scanner(System.in);
+
+        while (true) {
+            String s = sc.next();
+
+            if (s.equals("0")) {
+                return;
+            }
+            if (s.length() == 1) {
+                System.out.println("yes");
+                continue;
+            }
+
+            //배열 생성
+            String[] strings = new String[s.length()];
+            for (int i = 0; i < strings.length; i++) {
+                strings[i] = String.valueOf(s.charAt(i));
+            }
+
+            // 0 & strings.len-1
+            // 1 & strings.len-2
+            // start  < mid 일 때 까지
+            for (int j = 0; j < strings.length / 2; j++) {
+                // 같지 않다면 No 출력하고 종료하기
+                if (!strings[j].equals(strings[strings.length - 1 - j])) {
+                    System.out.println("no");
+                    break;
+                }
+                if (j == strings.length / 2 - 1) {
+                    System.out.println("yes");
+                }
+
+            }
+        }
+    }
+}
+
+```
+
+---
+
+
