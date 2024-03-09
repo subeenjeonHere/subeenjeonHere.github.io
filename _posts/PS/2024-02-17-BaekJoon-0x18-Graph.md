@@ -1,7 +1,7 @@
 ---
 title: BaekJoon 0x18 Graph
 date: 2024-02-17
-categories: Algorithms
+categories: PS
 tags:
   [
     PS
