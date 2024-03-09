@@ -1,11 +1,10 @@
 ---
 title: BaekJoon Class-2
 date: 2024-03-05
-categories: Algorithms
+categories: PS
 tags:
   [
-    Algorithms
-
+    PS
   ]
 ---
 

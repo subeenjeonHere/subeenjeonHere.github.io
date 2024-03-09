@@ -1,10 +1,10 @@
 ---
 title: BaekJoon 0x04 List
 date: 2024-02-22
-categories: Algorithms
+categories: PS
 tags:
   [
-    Algorithms
+    PS
     Baekjoon
   ]
 ---

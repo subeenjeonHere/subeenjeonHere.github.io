@@ -1,11 +1,11 @@
 ---
 title: BaekJoon 0x05 Stack
 date: 2024-02-15
-categories: Algorithms
+categories: PS
 tags:
   [
-    Algorithms
-      Baekjoon
+    PS
+    Baekjoon
   ]
 ---
 

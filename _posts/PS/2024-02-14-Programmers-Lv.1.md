@@ -1,11 +1,11 @@
 ---
 title: Programmers Lv.1
 date: 2024-02-14
-categories: Algorithms
+categories: PS
 tags:
   [
-    Algorithms
-      Programmers
+    PS
+    Programmers
   ]
 ---
 

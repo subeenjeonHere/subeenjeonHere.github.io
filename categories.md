@@ -15,6 +15,7 @@ categories:
       - Web
       - SoftwareDev
       - Etcetera
+  - PS
   - ProjectJourney
   - Web
   - Etc.

@@ -4,8 +4,8 @@ date: 2024-02-17
 categories: Algorithms
 tags:
   [
-    Algorithms
-      Baekjoon
+    PS
+    Baekjoon
   ]
 ---
 
