@@ -842,7 +842,7 @@ public class Main3 {
 
 ---
 
-# ☺︎ Snippets
+## ☺︎ Snippets
 
 ```java
 public class Main {
@@ -887,5 +887,185 @@ num = 6 * cnt;
 6의 배수만큼 층이 증가한다고 했다. 1층엔 1 ~7 개의 셀이 있을거고 1번만 이동하면 된다. 2층엔 8 ~ 19 셀이 있을 것이다. 이를 방번호로 체크해주면서, 각 층마다 누적된 셀의 개수를 판별할 수 있다. ( ≤ 이하라면) 으로 판별했다.
 
 `cnt += i; num = 6 * cnt;`
+
+---
+
+# ☻ 나이 순 정렬
+
+2024년 3월 9일
+
+## 문제
+
+온라인 저지에 가입한 사람들의 나이와 이름이 가입한 순서대로 주어진다. 이때, 회원들을 나이가 증가하는 순으로, 나이가 같으면 먼저 가입한 사람이 앞에 오는 순서로 정렬하는 프로그램을 작성하시오.
+
+## 입력
+
+첫째 줄에 온라인 저지 회원의 수 N이 주어진다. (1 ≤ N ≤ 100,000)
+
+둘째 줄부터 N개의 줄에는 각 회원의 나이와 이름이 공백으로 구분되어 주어진다. 나이는 1보다 크거나 같으며, 200보다 작거나 같은 정수이고, 이름은 알파벳 대소문자로 이루어져 있고, 길이가 100보다 작거나 같은 문자열이다. 입력은 가입한 순서로 주어진다.
+
+## 출력
+
+첫째 줄부터 총 N개의 줄에 걸쳐 온라인 저지 회원을 나이 순, 나이가 같으면 가입한 순으로 한 줄에 한 명씩 나이와 이름을 공백으로 구분해 출력한다.
+
+## 예제 입력 1
+
+```
+3
+21 Junkyu
+21 Dohyun
+20 Sunyoung
+
+```
+
+## 예제 출력 1
+
+```
+20 Sunyoung
+21 Junkyu
+21 Dohyun
+```
+
+---
+
+## ☺︎ a/t
+
+### 2차원 배열을 정렬하는 방법
+
+1. 배열의 각 요소를 순회하기 위해 반복문을 사용한다.
+2. 현재 요소와 다음 요소를 비교한다. 이 비교는 첫 번째 요소를 기준으로 수행되며, 첫 번째 요소가 같은 경우 두 번째 요소를 기준으로 비교하게 된다.
+3. 현재 요소가 다음 요소보다 큰 경우, 두 요소를 교환한다. 이를 스왑이라하며, 일시적인 변수를 사용하여 두 요소의 위치를 교환한다.
+4. 모든 요소를 순회한 후, 배열은 첫 번째 요소를 기준으로 오름차순 정렬되며, 첫 번째 요소가 동일한 경우 두 번째 요소를 기준으로 오름차순 정렬된 상태가 된다.
+
+이 과정을 반복하면서 배열의 모든 요소를 순회하고, 필요한 경우 요소의 위치를 교환하면 2차원 배열을 정렬할 수 있다.
+
+---
+
+## ☺︎ Snippets
+
+> 1차
+>
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int n = sc.nextInt();
+        String[][] arr = new String[n][2];
+
+        int rows = arr.length;
+        int cols = arr[0].length;
+        //배열 저장
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                arr[i][j] = String.valueOf(sc.next());
+            }
+        }
+        /**
+         * @Note 2차원 배열 ArrayList에 저장
+         */
+        ArrayList<ArrayList<String>> arrayList = new ArrayList<>();
+        for (String[] row : arr) {
+            //각 행을 나타내는 ArrayList<String>을 데이터 추가
+            ArrayList<String> rowData = new ArrayList<>(Arrays.asList(row));
+            arrayList.add(rowData);
+        }
+        // 추가: 가입일 Idx
+        for (int i = 0; i < arrayList.size(); i++) {
+            arrayList.get(i).add(String.valueOf(i));
+        }
+
+        // 정렬 나이순, 나이 같으면 가입순
+        // 나이가 같다면, idx를 보고 판단
+        for (int i = 0; i < arrayList.size(); i++) {
+            for (int j = i + 1; j < arrayList.size(); j++) {
+                int age1 = Integer.parseInt(arrayList.get(i).get(0));
+                int age2 = Integer.parseInt(arrayList.get(j).get(0));
+                int idx1 = Integer.parseInt(arrayList.get(i).get(2));
+                int idx2 = Integer.parseInt(arrayList.get(j).get(2));
+
+//                System.out.println("get(i): " + arrayList.get(i));
+//                System.out.println("get(2): " + arrayList.get(i).get(2));
+
+                //나이 순 오름차순 정렬
+                if ((age1 == age2 && idx1 > idx2) || age1 > age2) {
+                    //Swap
+//                    ArrayList<String> temp = new ArrayList<>(arrayList.get(i));
+//                    arrayList.set(i, new ArrayList<>(arrayList.get(j)));
+//                    arrayList.set(j, new ArrayList<>(temp));
+                    Collections.swap(arrayList, i, j);
+                }
+            }
+        }
+
+        for (ArrayList<String> row : arrayList) {
+            row.remove(2);
+        }
+        StringBuilder sb = new StringBuilder();
+        for (int p = 0; p < arrayList.size(); p++) {
+            for (int q = 0; q < arrayList.get(p).size(); q++) {
+                sb.append(arrayList.get(p).get(q)).append(" ");
+            }
+
+            sb.append("\n");
+        }
+        System.out.print(sb.toString().trim());
+    }
+}
+
+```
+
+시간초과다. 코드의 병목 현상은 아마 나이, 가입일 순으로 정렬하는 과정에서 발생했을 것이다.
+
+### 시간 복잡도 다시 생각하기
+
+버블 정렬 형태로 작동한다. 버블 정렬의 시간 복잡도는 일반적으로 O(n^2)이다. 이때 'n'은 정렬해야 하는 요소의 수, 즉 사람 수를 의미한다.
+
+- 각 회원을 모든 회원들과 비교한다. 이중 for loop를 통해 구현되며 이로 인해 O(n^2)의 시간 복잡도가 발생한다.
+- 또한, swap 연산을 사용하여 회원의 위치를 바꾼다. 이는 각 회원을 다른 모든 회원과 비교할 때마다 발생하므로 O(n^2)의 시간 복잡도를 가진다.
+
+따라서 이 알고리즘의 전체 시간 복잡도는 O(n^2)이다.
+
+그럼, 문제에선 최대 100,000명까지 회원이 있을 수 있으므로, n^2의 연산이 수행된다. 따라서 회원 수가 100,000인 경우, 최대 10,000,000,000번의 연산이 수행된다.
+
+### 어떻게 줄여야 하나
+
+시간 복잡도 면에서 비효율적인 버블정렬 말고 다른 정렬 방식을 사용한다.
+
+```java
+public class Main {
+    public static void main(String[] args) {
+    
+arrayList.sort(new Comparator<ArrayList<String>>() {
+            @Override
+            public int compare(ArrayList<String> o1, ArrayList<String> o2) {
+                int a1 = Integer.parseInt(o1.get(0));
+                int a2 = Integer.parseInt(o2.get(0));
+                return Integer.compare(a1, a2);
+            }
+        });
+        arrayList.sort(new Comparator<ArrayList<String>>() {
+            @Override
+            public int compare(ArrayList<String> o1, ArrayList<String> o2) {
+                int age1 = Integer.parseInt(o1.get(0));
+                int age2 = Integer.parseInt(o2.get(0));
+                int idx1 = Integer.parseInt(o1.get(2));
+                int idx2 = Integer.parseInt(o2.get(2));
+                if (age1 == age2 && idx1 > idx2) {
+                    return Integer.compare(idx1, idx2);
+                }
+                return 0;
+
+            }
+        });
+        
+        }
+      }
+```
+
+Arrays.sort() 메소드를 사용한다. 분할 정복을 사용해 데이터를 더 작은 단위로 분할하고, 각각을 정렬한 후 다시 병합하는 방식으로 작동한다. 버블정렬보다 빠르게 O(n log n) 시간 복잡도를 갖는다.
+
+따라서, 같은 양의 데이터를 정렬할 때 `Arrays.sort()` 메소드는 버블 정렬보다 훨씬 빠르게 동작한다.
 
 ---
