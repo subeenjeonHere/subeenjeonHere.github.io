@@ -1074,3 +1074,170 @@ Arrays.sort() 메소드를 사용한다. 분할 정복을 사용해 데이터를
 따라서, 같은 양의 데이터를 정렬할 때 `Arrays.sort()` 메소드는 버블 정렬보다 훨씬 빠르게 동작한다.
 
 ---
+
+# ☻ 큐
+
+2024년 3월 9일
+
+## 문제
+
+정수를 저장하는 큐를 구현한 다음, 입력으로 주어지는 명령을 처리하는 프로그램을 작성하시오.
+
+명령은 총 여섯 가지이다.
+
+- push X: 정수 X를 큐에 넣는 연산이다.
+- pop: 큐에서 가장 앞에 있는 정수를 빼고, 그 수를 출력한다. 만약 큐에 들어있는 정수가 없는 경우에는 -1을 출력한다.
+- size: 큐에 들어있는 정수의 개수를 출력한다.
+- empty: 큐가 비어있으면 1, 아니면 0을 출력한다.
+- front: 큐의 가장 앞에 있는 정수를 출력한다. 만약 큐에 들어있는 정수가 없는 경우에는 -1을 출력한다.
+- back: 큐의 가장 뒤에 있는 정수를 출력한다. 만약 큐에 들어있는 정수가 없는 경우에는 -1을 출력한다.
+
+## 입력
+
+첫째 줄에 주어지는 명령의 수 N (1 ≤ N ≤ 10,000)이 주어진다. 둘째 줄부터 N개의 줄에는 명령이 하나씩 주어진다. 주어지는 정수는 1보다 크거나 같고, 100,000보다 작거나 같다. 문제에 나와있지 않은 명령이 주어지는 경우는 없다.
+
+## 출력
+
+출력해야하는 명령이 주어질 때마다, 한 줄에 하나씩 출력한다.
+
+## 예제 입력 1
+
+```
+15
+push 1
+push 2
+front
+back
+size
+empty
+pop
+pop
+pop
+size
+empty
+pop
+push 3
+empty
+front
+```
+
+## 예제 출력 1
+
+```
+1
+2
+2
+0
+1
+2
+-1
+0
+1
+-1
+0
+3
+```
+
+---
+
+## ☺︎ Snippets
+
+```java
+public class Main {
+    public static void main(String[] args) throws IOException {
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringBuilder sb = new StringBuilder();
+        Queue<Integer> q = new LinkedList<>();
+
+        int n = Integer.parseInt(br.readLine());
+
+        for (int i = 0; i < n; i++) {
+            String[] arr = new String[2];
+            StringTokenizer stk = new StringTokenizer(br.readLine(), " ");
+            int st = 0;
+            while (stk.hasMoreTokens()) {
+                arr[st] = stk.nextToken();
+                st++;
+            }
+            if (arr[0].equals("push")) {
+                int ele = Integer.parseInt(arr[1]);
+                q.offer(ele);
+            } else if (arr[0].equals("front")) {
+                if (q.isEmpty()) {
+                    System.out.println("-1");
+                } else {
+                    int peeked = q.peek();
+                    System.out.println(peeked);
+                }
+                //큐는 맨 뒤 원소 반납하는 메소드 없음
+            } else if (arr[0].equals("back")) {
+                if (q.isEmpty()) {
+                    System.out.println("-1");
+                } else {
+                    back(q);
+                }
+            } else if (arr[0].equals("empty")) {
+                if (q.isEmpty()) {
+                    System.out.println("1");
+                } else {
+                    System.out.println("0");
+                }
+            } else if (arr[0].equals("pop")) {
+                if (!q.isEmpty()) {
+                    int peeked = q.peek();
+                    System.out.println(peeked);
+                    q.poll();
+                } else {
+                    System.out.println("-1");
+                }
+            } else if (arr[0].equals("size")) {
+                int size = q.size();
+                System.out.println(size);
+            }
+        }
+    }
+
+    //맨 뒤 원소 반환
+    private static void back(Queue<Integer> q) {
+        StringBuilder sb = new StringBuilder();
+        int len = q.size();
+        int last = 0;
+        for (int i = 1; i <= len; i++) {
+            last = q.poll();
+            q.offer(last);
+            //i가 2일 때 마지막 원소가 최상단에 옴
+            //q 사이즈는 2
+        }
+        System.out.println(last);
+    }
+}
+```
+
+큐 자료구조를 공부할 수 있었던 기본 문제다.
+
+---
+
+### 큐와 스택 다시 정리
+
+큐(Queue)와 스택(Stack)은 둘 다 컬렉션의 한 유형이며, 데이터를 관리하는 방식에 따라 차이가 있다.
+
+### 스택(Stack)
+
+데이터의 **추가와 제거가 동일한 쪽에서 이루어지는 후입선출(LIFO**, Last In First Out) 방식의 자료구조이다. 즉, 가장 마지막에 들어간 항목이 가장 먼저 나오게 된다. 스택에 데이터를 추가하는 것을 '푸시(push)'라고 하며, 데이터를 제거하는 것을 '팝(pop)'이라고 한다.
+
+### 큐(Queue)
+
+데이터의 추가가 **한 쪽에서 이루어지고 제거는 반대 쪽에서 이루어지는 선입선출(FIFO,** First In First Out) 방식의 자료구조이다. 즉, 가장 먼저 들어간 항목이 가장 먼저 나오게 된다. 큐에 데이터를 추가하는 것을 '인큐(enqueue)'라고 하며, 데이터를 제거하는 것을 '디큐(dequeue)'라고 한다.
+
+### 어떤 상황에서 어떤 자료구조를 사용해야 하는가?
+
+> 큐(Queue)
+>
+1. 여러 사용자가 공유하는 자원을 관리할 때. 예를 들어 CPU 스케줄링, 디스크 스케줄링 등
+2. 데이터가 비동기적으로 (송신 속도와 수신 속도가 반드시 일치하지 않음) 두 프로세스 사이에서 전송될 때. 예를 들어 IO 버퍼, 파이프, 파일 IO 등
+
+> 스택(Stack)
+>
+1. **마지막에 입력된 데이터가 먼저 처리**되어야 하는 상황. 예를 들어, 웹 브라우저의 '뒤로 가기' 버튼은 이전에 방문한 모든 URL을 스택에 저장한다.
+2. 새 페이지를 방문할 때마다 해당 페이지의 URL이 스택의 맨 위에 추가되고, '뒤로 가기' 버튼을 누르면 현재 URL이 스택에서 제거된다.
