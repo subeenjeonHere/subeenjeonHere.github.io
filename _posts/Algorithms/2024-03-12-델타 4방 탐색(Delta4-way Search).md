@@ -16,6 +16,8 @@ tags:
 
 ## Snippets
 
+![image](https://github.com/subeenjeonHere/subeenjeonHere.github.io/assets/145312273/5c3e741e-3841-4a7b-837e-b2773969e5c6)
+
 ```java
 public class Main {
     // 상하
@@ -25,11 +27,6 @@ public class Main {
 
     public static void main(String[] args) {
         int N = 4;
-        int[][] map = {{1, 2, 3, 4},
-                {5, -1, 7, 8},
-                {9, 10, 11, 12},
-                {13, 14, -1, 16}};
-
         for (int x = 0; x < 4; x++) {
             for (int y = 0; y < 4; y++) {
                 if (map[x][y] == -1) {
