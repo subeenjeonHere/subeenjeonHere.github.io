@@ -366,6 +366,86 @@ XSS는 사용자의 브라우저가 실행할 수 있는 스크립트를 웹 페
 
 ---
 
+# ☻ 현재 로그인 한 회원을 추적하기
+
+홈페이지에 접속한 사용자에게 ‘(사용자명)님, 안녕하세요!’와 같은 메시지를 출력하고 싶었다. 이를 위해 두 가지 주요 컴포넌트 ActiveUserStore와 LoggedUser를 사용했다.
+### 동작 방식
+
+![image](https://github.com/subeenjeonHere/subeenjeonHere.github.io/assets/145312273/c8866d27-9c47-4f87-a1a6-929aabd44c59)
+
+### ActiveUserStore
+
+```jsx
+public class ActiveUserStore {
+    public List<String> users;
+
+    public ActiveUserStore() {
+        users = new ArrayList<>();
+    }
+```
+
+`ActiveUserStore`는 현재 로그인한 사용자들의 목록을 관리하는 클래스이다. `users`라는 리스트를 멤버 변수로 가지고 있으며, 이 리스트에는 현재 로그인한 사용자들의 username이 저장된다.
+
+```jsx
+@Bean
+    public ActiveUserStore activeUserStore() {
+        return new ActiveUserStore();
+    }
+```
+
+`ActiveUserStore` 객체는 `@Bean` 어노테이션을 사용하여 어플리케이션 전반에서 사용할 수 있게 설정하였다.
+
+### LoggedUser
+
+```jsx
+@Component
+public class LoggedUser implements HttpSessionBindingListener, Serializable {
+
+    private static final long serialVersionUID = 1L;
+    private String username;
+    private ActiveUserStore activeUserStore;
+
+    public LoggedUser(String username, ActiveUserStore activeUserStore) {
+        this.username = username;
+        this.activeUserStore = activeUserStore;
+    }
+    public LoggedUser() {
+    }
+
+    @Override
+    public void valueBound(HttpSessionBindingEvent event) {
+        List<String> users = activeUserStore.getUsers();
+        LoggedUser user = (LoggedUser) event.getValue();
+        if (!users.contains(user.getUsername())) {
+            users.add(user.getUsername());
+        }
+    }
+
+    @Override
+    public void valueUnbound(HttpSessionBindingEvent event) {
+        List<String> users = activeUserStore.getUsers();
+        LoggedUser user = (LoggedUser) event.getValue();
+        if (users.contains(user.getUsername())) {
+            users.remove(user.getUsername());
+        }
+    }
+```
+
+`LoggedUser`는 `HttpSessionBindingListener`와 `Serializable` 인터페이스를 구현하는 컴포넌트로, 로그인한 사용자를 실시간으로 추적하는 역할을 한다.
+
+이 클래스는 `username`과 `activeUserStore` 두 개의 멤버 변수를 가지고 있고, 각각 사용자의 이름과 현재 활성화된 사용자의 정보를 저장한다.
+
+그리고, `valueBound`와 `valueUnbound` 두 가지 메소드를 오버라이드 하여 사용자가 로그인 하거나 로그아웃 할 때 세션에 사용자 정보를 추가하거나 삭제한다.
+
+### ValueBound & ValueUnbound
+
+| 메소드 | 설명 |
+| --- | --- |
+| valueBound | 로그인할 때 호출되어, 세션에 사용자를 추가한다. users의 리스트에 사용자의 username을 추가하며, 사용자의 이름이 사용자 목록에 이미 존재하지 않는 경우에만 추가한다. |
+| valueUnbound | 로그아웃할 때 호출되어, 세션에서 사용자를 제거한다. users의 리스트에 사용자 이름이 존재하는 경우에 제거한다. |
+
+---
+
 # 📌 발생했던 에러 정리
 
 ### 1. 올바른 정보로 로그인 해도 에러가 발생한다.
