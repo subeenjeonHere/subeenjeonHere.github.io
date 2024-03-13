@@ -113,8 +113,9 @@ public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Excepti
 
 ### 주의해야 했던 것
 
-formLogin의 `usernameParameter`는 기본적으로 name을 사용하도록 되어있는데, 나는 로그인 시 email을 사용하여 로그인을 진행했으므로 처음에 에러가 발생했다. 이후 공식 문서를 계속
-찾아보고 이걸 알게돼서 usernameParameter를 email로 설정해주었다. name이 아닌 다른 속성으로 로그인을 처리한다면 발생할 것이니 꼭 바꿔주어야 한다.
+formLogin의 `usernameParameter`는 기본적으로 name을 사용하도록 되어있는데, 나는 로그인 시 email을 사용하여 로그인을 진행했으므로 처음에 에러가 발생했다.
+
+이후 공식 문서를 계속 찾아보고 이걸 알게돼서 usernameParameter를 email로 설정해주었다. name이 아닌 다른 속성으로 로그인을 처리한다면 발생할 것이니 꼭 바꿔주어야 한다.
 
 ---
 
@@ -213,28 +214,167 @@ public String loginUser(User user, HttpServletRequest request, Model model) {
 `model.addAttribute("session", session);` 으로 모델 속성에 현재 세션을 추가한다. 이렇게 추가하면 웹 페이지에서 세션 정보에 접근할 수 있다. 모든 처리가 완료되면 사용자는 메인
 페이지로 리다이렉트 된다.
 
+
 ### AppUserService
 
-```jsx
-@Override
-public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+### 동작 방식
 
-  User user = userRepository.findUserByEmail(email)
-          .orElseThrow(() -> new UsernameNotFoundException(USER_NOT_FOUND));
-  // revise
-  return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword()
-          , getAuthorities(user));
-}
+![image](https://github.com/subeenjeonHere/Planet-Project/assets/145312273/b30a570d-54cb-45de-b41e-8c04963d6507)
+
+
+메소드 내에선 먼저 사용자의 이메일로 데이터베이스를 검색하여 사용자가 존재하는지 확인한다. 만약 사용자가 존재하지 않는다면 `UsernameNotFoundException`을 발생시킨다.
+
+사용자가 존재한다면, 불러온 사용자 정보를 `UserDetails` 타입으로 변환하며 사용자의 이름과 비밀번호, 그리고 사용자의 권한 정보를 설정한다. 이렇게 생성된 `UserDetails` 객체는 Spring Security에서 사용자 인증을 처리하는데 사용된다.
+
+```jsx
+@Service
+@Transactional
+@AllArgsConstructor
+public class AppUserService implements UserDetailsService {
+
+// 생략
+
+    /**
+     * @param email
+     * @return
+     * @throws UsernameNotFoundException
+     * @Feature: Login with spring security
+     */
+    @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+
+        User user = userRepository.findUserByEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException(USER_NOT_FOUND));
+        // revise
+        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword()
+                , getAuthorities(user));
+    }
 ```
 
 Spring Security의 `UserDetailsService`를 구현하도록 유저 서비스 레이어를 만들었다.
 
 우선, `loadUserByUsername` 메소드는 사용자 이름으로 사용자 정보를 불러온다. 이 메소드는 사용자 정보를 나타내는 인터페이스인`UserDetails` 타입을 반환한다.
 
-메소드 내에선 먼저 사용자의 이메일로 데이터베이스를 검색하여 사용자가 존재하는지 확인한다. 만약 사용자가 존재하지 않는다면 `UsernameNotFoundException`을 발생시킨다.
+### UserDetails 인터페이스란?
 
-사용자가 존재한다면, 불러온 사용자 정보를 `UserDetails` 타입으로 변환하며 사용자의 이름과 비밀번호, 그리고 사용자의 권한 정보를 설정한다. 이렇게 생성된 `UserDetails` 객체는 Spring
-Security에서 사용자 인증을 처리하는데 사용된다.
+UserDetails는 Spring Security에서 사용자 정보를 나타내는 인터페이스이다.
+
+UserDetails를 구현한 클래스는 일반적으로 사용자 인증을 처리하기 위해 사용되며, 사용자 정보를 불러온다. 이를 통해 Spring Security는 사용자 인증, 권한 확인 등 보안 관련 처리를 수행할 수 있다.
+
+### 사용한 이유는
+
+| 이유 | 내용 |
+| --- | --- |
+| 공부 | Spring Security를 공부하고 있었기에, 시큐리티에서 제공하는 기능들을 다양하게 접해보고 싶었다. |
+| 표준화된 접근 방식 | 사용자 정보를 얻는 방법을 표준화할 수 있다고 생각했다. |
+| 유연성 | 현재 프로젝트 단계에서는 고려 사항이 아니지만, 유연하게 사용자 정보를 관리할 수 있다. 예를 들면, 사용자가 비밀번호를 변경해야 하는 시기, 계정이 잠겨 있는지 여부 등을 추가할 수 있다. |
+
+
+---
+
+
+# ☻ 세션 관리
+
+세션 관리는 Spring Security가 지원하는 Session Management를 사용했다.
+
+### 동작 방식
+
+```mermaid
+sequenceDiagram
+    participant U as 사용자
+    participant S as 서버
+    participant SM as 세션 관리
+    U->>S: 요청
+    S->>SM: 세션 확인
+    SM-->>S: 기존 세션 / 새 세션
+    S-->>U: 응답
+    Note over S: 사용자가 로그아웃하는 경우,
+    S->>SM: 세션 무효화
+    SM-->>S: 세션 무효화 확인
+
+```
+
+### **세션 생성 시기**
+
+세션이 언제 생성되는지와 스프링 시큐리티가 어떻게 세션과 상호작용 하는지를 제어할 수 있다:
+
+| 옵션 | 설명 |
+| --- | --- |
+| 항상 Always | 세션이 이미 존재하지 않는 경우 항상 세션을 생성한다. |
+| 필요한 경우 ifRequired | 필요한 경우에만 세션을 생성한다 (기본 설정). |
+| 절대로 never | 프레임워크는 스스로 세션을 생성하지 않지만 이미 존재하는 경우 사용할 수 있다. |
+| 상태 없음 stateless | 스프링 시큐리티에 의해 세션이 생성되거나 사용되지 않는다. |
+
+## Security Configuration
+
+```jsx
+.sessionManagement(httpSecuritySessionManagementConfigurer ->
+                        httpSecuritySessionManagementConfigurer
+                                .sessionFixation().migrateSession()
+                                .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
+                                .maximumSessions(1))
+```
+
+세션 관리 설정은 `.sessionManagement()` 메소드를 통해 이루어진다.
+
+우선, `httpSecuritySessionManagementConfigurer` 객체를 인자로 받아서 세션 고정, 세션 생성 정책, 최대 세션 수 등을 설정하게 해준다.
+
+세션 관련 설정한 내용은 아래와 같다.
+
+### 세션 설정 관련
+
+| 메소드 | 설명 |
+| --- | --- |
+| .sessionFixation().migrateSession() | 세션 고정 공격을 방지하기 위해 사용자 인증 후 항상 새로운 세션을 제공하도록 설정 |
+| .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED) | 세션 생성 정책을 설정하며 필요한 경우에만 세션 생성 |
+| .maximumSessions(1) | 동시에 로그인할 수 있는 세션의 최대 수 설정. 한 사용자당 하나의 세션만 허용 |
+
+## Session Flags
+
+세션 플래그는 세션 쿠키의 동작을 제어하는 설정이다. 공식 문서를 찾아보니 보안을 강화하고, 세션 동작을 정의하는 데에 사용된다고 한다.
+
+```jsx
+server:
+  servlet:
+    session:
+      timeout: 60m
+      cookie:
+        http-only: true
+        secure: true
+```
+
+예를 들어, 예를 들어, 'http-only' 플래그는 쿠키가 자바스크립트를 통해 접근할 수 없도록 제한하여 XSS 공격을 방지할 수 있도록 해준다.
+
+‘Secure' 플래그는 쿠키가 HTTPS를 통해서만 전송되도록 강제하여 중간자 공격을 방지하게 해준다.
+
+# ✏️ 궁금했던 것
+
+### 세션 플래그가 XSS를 어떻게 막아주는 것인지
+
+XSS는 사용자의 브라우저가 실행할 수 있는 스크립트를 웹 페이지에 삽입하는 것이며, 이 스크립트는 웹 사이트를 이용하는 사용자들의 브라우저에서 실행되어 쿠키나 세션을 탈취하는 공격 방식이다.
+
+예를 들어, 'http-only' 플래그가 있는 경우, 세션 쿠키는 자바스크립트를 통해 접근할 수 없다. XSS 공격자는 스크립트를 통해 사용자의 쿠키에 접근하려고 시도하지만 'http-only' 플래그로 인해 이를 방지할 수 있다고 한다.
+
+### 세션 플래그가 세션, 쿠키를 HTTPS로만 전송되도록 하는 방법?
+
+또한 'secure' 플래그가 설정되어 있으면, 세션 쿠키는 HTTPS를 통해서만 전송될 수 있다.
+
+중간자 공격자는 일반적으로 HTTP 통신을 가로채서 세션 쿠키를 훔치는데, secure 플래그로 인해 이를 막아준다고 한다.
+
+> **HTTPs**
+> http에 **암호화를 추가한 프로토콜**이다.
+데이터 ↔ 서버 사이에서 전송될 때, 중간에서 데이터를 가로채도 암호화되어 있기 때문에 내용을 알아볼 수 없다. 이로써 중간자 공격을 방어할 수 있는 것이다.
+
+
+### 세션 매니지먼트와, 플래그의 차이점?
+
+세션 매니지먼트는 세션의 생명주기를 관리하는 데 초점을 맞추고 있다.
+
+세션의 유효성 검사, 만료, 동시 세션 제어 등등을 포함한다. 이를 통해 사용자가 시스템에 접근할 수 있는 방식을 제어하고, 세션을 통해 사용자를 추적하고, 필요에 따라 세션을 무효화 한다.
+
+반면 세션 플래그는 세션 쿠키의 보안을 강화하는 데 사용된다. 플래그는 쿠키가 어떻게, 언제, 어디서 전송되는지를 제어하며, 이를 통해 다양한 보안 위협을 방지해준다.
+
+즉, 세션 매니지먼트와 세션 플래그 모두 세션 보안에 중요하지만, 이들이 해결하려는 문제와 사용하는 방법은 서로 다른 것이다.
 
 ---
 
