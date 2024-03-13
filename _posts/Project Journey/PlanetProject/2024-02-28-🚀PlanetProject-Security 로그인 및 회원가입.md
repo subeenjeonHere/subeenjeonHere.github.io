@@ -279,20 +279,8 @@ UserDetails를 구현한 클래스는 일반적으로 사용자 인증을 처리
 
 ### 동작 방식
 
-```mermaid
-sequenceDiagram
-    participant U as 사용자
-    participant S as 서버
-    participant SM as 세션 관리
-    U->>S: 요청
-    S->>SM: 세션 확인
-    SM-->>S: 기존 세션 / 새 세션
-    S-->>U: 응답
-    Note over S: 사용자가 로그아웃하는 경우,
-    S->>SM: 세션 무효화
-    SM-->>S: 세션 무효화 확인
+![image](https://github.com/subeenjeonHere/subeenjeonHere.github.io/assets/145312273/d838f282-59ac-4ac0-b3e9-448ebcc4141b)
 
-```
 
 ### **세션 생성 시기**
 
