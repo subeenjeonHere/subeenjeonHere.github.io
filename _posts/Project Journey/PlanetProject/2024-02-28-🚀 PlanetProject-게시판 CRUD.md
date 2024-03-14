@@ -57,6 +57,11 @@ tags:
 
 ![My Gif](https://subeenjeonHere.github.io/assets/t1.gif)
 
+## ☺︎ 게시글 리스트, 페이지 네이션 동작 방식
+
+![image](https://github.com/subeenjeonHere/subeenjeonHere.github.io/assets/145312273/1efa19b3-556e-4ce9-9ab0-209db93b1ff6)
+
+
 ### Controller
 
 ![image](https://github.com/subeenjeonHere/subeenjeonHere.github.io/assets/145312273/bd02db02-3b79-47c7-8d53-1f2032b3eda4)
@@ -176,6 +181,10 @@ public String boardList2(Model model, Pageable pageable) {
 
 # ☻ 게시글 조회 + 조회수 증가
 
+## ☺︎ 특정 게시글 조회 동작 방식
+
+![image](https://github.com/subeenjeonHere/subeenjeonHere.github.io/assets/145312273/d22070be-e221-461b-8346-915444efcd4d)
+
 ### Controller
 
 ![image](https://github.com/subeenjeonHere/subeenjeonHere.github.io/assets/145312273/7091039a-4756-4049-9eaa-cfe9b96a1c37)
@@ -272,6 +281,9 @@ Spring Data JPA에서 제공하는 어노테이션으로, 이 어노테이션을
 
 ![My Gif](https://subeenjeonHere.github.io/assets/t22.gif)
 
+## ☺︎ 게시글 작성 동작 방식
+
+![image](https://github.com/subeenjeonHere/subeenjeonHere.github.io/assets/145312273/75131d2b-4e0b-4dff-8a2e-65cb5b3f99c2)
 ### Controller
 
 ![image](https://github.com/subeenjeonHere/subeenjeonHere.github.io/assets/145312273/73aa3e21-4af2-421f-81d6-3b02a4554805)
@@ -352,6 +364,9 @@ if (!board.getTitle().isEmpty() && !board.getContent().isEmpty()) {
 
 # ☻ 게시글 수정
 
+## ☺︎ 게시글 수정 동작 방식
+
+![image](https://github.com/subeenjeonHere/subeenjeonHere.github.io/assets/145312273/0dccde55-7d48-4851-94a4-744064539dac)
 ### Controller
 
 ![image](https://github.com/subeenjeonHere/subeenjeonHere.github.io/assets/145312273/20700512-b0d5-40cd-85bf-03ed1c7bb01a)
@@ -388,6 +403,10 @@ public Optional<Board> findBoardById(Long boardNo) {
 ---
 
 # ☻ 게시글 삭제
+
+## ☺︎ 게시글 삭제와 동작 방식
+
+![image](https://github.com/subeenjeonHere/subeenjeonHere.github.io/assets/145312273/3a4ec15b-9a37-461d-844f-9991fd4ad742)
 
 ### Controller
 
