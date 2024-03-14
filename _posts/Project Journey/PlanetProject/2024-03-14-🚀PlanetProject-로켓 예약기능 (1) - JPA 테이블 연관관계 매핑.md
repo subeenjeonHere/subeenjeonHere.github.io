@@ -225,48 +225,9 @@ public void setUser(User users) {
 연관관계를 설정하는 것이 필요하다.
 
 
-<details>
-<summary>테스트 코드</summary>
+### 테스트 코드
 
-```java
-
-@DisplayName("예약Test")
-@Test
-@Transactional
-public void testUserMakesReservation() {
-    //유저 저장
-    User user = User.builder().username("testuser").password("password").email("testuser@example.com").phoneNumber("1234567890").passportNumber("AB123456").birtDate(new Date()).locked(false).enabled(true).role("ROLE_USER").build();
-    userRepository.save(user);
-
-    //행성 저장
-    Planet departurePlanet = new Planet(1L, "Departure Planet", "Departure Description");
-    Planet arrivalPlanet = new Planet(2L, "Arrival Planet", "Arrival Description");
-    planetRepository.save(departurePlanet);
-    planetRepository.save(arrivalPlanet);
-
-    //예약에 필요한 정보 추출
-    Optional<Planet> dep = planetRepository.findById(departurePlanet.getPlanetId());
-    Optional<Planet> arr = planetRepository.findById(arrivalPlanet.getPlanetId());
-    String userEmail = user.getEmail();
-    String userPhone = user.getPhoneNumber();
-    String userPass = user.getPassportNumber();
-
-    //예약 정보 생성
-    Reservation res = new Reservation();
-    res.setDeparturePlanet(dep.get());
-    res.setArrivalPlanet(dep.get());
-    res.setTravleDate(new Date());
-    res.setPassengerCount(1);
-    res.setPaymentStatus("Pending");
-    res.setUser(user);
-
-    reservationRepository.save(res);
-}
-```
-
-</details>
-
-
+![image](https://github.com/subeenjeonHere/subeenjeonHere.github.io/assets/145312273/65f61a3e-da8a-424b-8176-10bb9884f9c5)
 
 
 테스트 코드에서는 사용자(User)에 대한 모든 파라미터를 직접 설정하고, setUser 메소드를 통해 User 객체를 Reservation 객체에 바로 연결할 수 있었다.
