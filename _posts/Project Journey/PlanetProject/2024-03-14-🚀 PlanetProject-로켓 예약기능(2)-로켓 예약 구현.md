@@ -125,15 +125,14 @@ tags:
 
 ---
 
-## ☺︎ 로켓 스케쥴 조회와 동작 방식
+## ☺︎ 로켓 예약 폼 동작 방식
 
 사용자가 로켓 예약 폼에 접속하면, 사용자에게 표시할 모든 행성 정보, 스케줄 정보, 그리고 로켓 정보를 조회하는 로직이다.
 
 이를 위해 `PlanetRepository`, `ScheduleService`, 그리고 `RocketRepository`를 사용하여 각각의 정보를 가져왔다. 이후 컨트롤러에서 Model에 추가하여 사용자에게 표시하도록 했다.
 
-### 로켓 스케쥴 조회
 
-![image](https://github.com/subeenjeonHere/subeenjeonHere.github.io/assets/145312273/5e33b403-9f9c-47fd-a7f7-211482baf890)
+![image](https://github.com/subeenjeonHere/subeenjeonHere.github.io/assets/145312273/d4788c7e-bb66-4406-8bff-5c85781d9902)
 
 ### Controller
 
@@ -211,10 +210,11 @@ public interface RocketRepository extends JpaRepository<Rocket, Long> {
 
 ![image](https://github.com/subeenjeonHere/subeenjeonHere.github.io/assets/145312273/521e315a-aecf-40c3-9b78-139468343a68)
 
+---
 
 ## ☺︎ 로켓 예약 내역 조회와 동작 방식
 
-![image](https://github.com/subeenjeonHere/subeenjeonHere.github.io/assets/145312273/aaf08a95-3fa4-4d56-adb3-b122e4a03ef1)
+![image](https://github.com/subeenjeonHere/subeenjeonHere.github.io/assets/145312273/2755541a-f956-4d1b-adb9-3d43705fb05a)
 
 
 ### Controller
