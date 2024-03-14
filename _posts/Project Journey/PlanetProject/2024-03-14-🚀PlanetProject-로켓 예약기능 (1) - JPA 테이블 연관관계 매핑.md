@@ -264,17 +264,29 @@ Reservation과 Schedule은 1:N 관계이고, 여기서 Reservation 테이블에 
 ![image](https://github.com/subeenjeonHere/Planet-Project/assets/145312273/b69f32a8-44a3-4ec9-9ff1-29e734245b57)
 
 
-| ERD | Reservation | Schedule |
-| --- | --- | --- |
-| ![image](https://github.com/subeenjeonHere/Planet-Project/assets/145312273/ccdfdbbf-6f50-440e-9316-00e22d02874f) | ![image](https://github.com/subeenjeonHere/Planet-Project/assets/145312273/bbfbeebb-c741-4f04-a70b-c508f1d41313) | ![img.png](img.png) |
+| ERD |
+|-----|
+|  ![image](https://github.com/subeenjeonHere/Planet-Project/assets/145312273/ccdfdbbf-6f50-440e-9316-00e22d02874f)   |
+
+| Reservation | Schedule |
+| --- | --- |
+| ![image](https://github.com/subeenjeonHere/Planet-Project/assets/145312273/bbfbeebb-c741-4f04-a70b-c508f1d41313) | ![image](https://github.com/subeenjeonHere/subeenjeonHere.github.io/assets/145312273/57cbed6b-f96a-43d1-9842-708b95ea8c22) |
+
+
+
 
 ---
 
 # ☺︎ Schedule ↔ Rocket
 
-| ERD | Schedule | Rocket |
-| --- | --- | --- |
-| ![image](https://github.com/subeenjeonHere/Planet-Project/assets/145312273/2418a230-bc30-4fef-b9ec-27c90e9e0038) | ![image](https://github.com/subeenjeonHere/Planet-Project/assets/145312273/dd6785c8-9622-4922-a542-ed5403bf43e4) | ![img_1.png](img_1.png) |
+| ERD |
+|-----|
+|  ![image](https://github.com/subeenjeonHere/Planet-Project/assets/145312273/2418a230-bc30-4fef-b9ec-27c90e9e0038)   |
+
+
+| Schedule | Rocket |
+| --- | --- |
+| ![image](https://github.com/subeenjeonHere/Planet-Project/assets/145312273/dd6785c8-9622-4922-a542-ed5403bf43e4) | ![img_1.png](img_1.png) |
 
 ![image](https://github.com/subeenjeonHere/Planet-Project/assets/145312273/aba0345d-04af-4daa-a599-4385dcb612c7)
 
