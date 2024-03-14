@@ -286,7 +286,7 @@ Reservation과 Schedule은 1:N 관계이고, 여기서 Reservation 테이블에 
 
 | Schedule | Rocket |
 | --- | --- |
-| ![image](https://github.com/subeenjeonHere/Planet-Project/assets/145312273/dd6785c8-9622-4922-a542-ed5403bf43e4) | ![img_1.png](img_1.png) |
+| ![image](https://github.com/subeenjeonHere/Planet-Project/assets/145312273/dd6785c8-9622-4922-a542-ed5403bf43e4) | ![image](https://github.com/subeenjeonHere/subeenjeonHere.github.io/assets/145312273/940f1c1c-b0c1-4afa-b7e4-c14139c519db) |
 
 ![image](https://github.com/subeenjeonHere/Planet-Project/assets/145312273/aba0345d-04af-4daa-a599-4385dcb612c7)
 
