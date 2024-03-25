@@ -8,10 +8,7 @@ tags:
   ]
 ---
 
-### Algorithms
-
-집합과 맵, DP, 그래프(DFS/BFS), 그리디, 우선순위큐, 누적합, 좌표 압축
-
+# [문제 풀이 Github](https://github.com/subeenjeonHere/int-_Algorithms/issues/7)
 
 ---
 
