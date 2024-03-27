@@ -1996,7 +1996,6 @@ public class Main {
 # ☻ 잃어버린 괄호
 
 <summary>
-
 <details>
 
 2024년 3월 25일
@@ -2263,5 +2262,209 @@ String[] res = s.split("[+\\-]");
 ---
 
 </details>
-
 </summary>
+
+---
+
+# ☻ 숨바꼭질
+
+<summary>
+
+<details>
+
+2024년 3월 26일
+
+## 문제
+
+수빈이는 동생과 숨바꼭질을 하고 있다. 수빈이는 현재 점 N(0 ≤ N ≤ 100,000)에 있고, 동생은 점 K(0 ≤ K ≤ 100,000)에 있다. 수빈이는 걷거나 순간이동을 할 수 있다. 만약, 수빈이의 위치가 X일 때 걷는다면 1초 후에 X-1 또는 X+1로 이동하게 된다. 순간이동을 하는 경우에는 1초 후에 2*X의 위치로 이동하게 된다.
+
+수빈이와 동생의 위치가 주어졌을 때, 수빈이가 동생을 찾을 수 있는 가장 빠른 시간이 몇 초 후인지 구하는 프로그램을 작성하시오.
+
+## 입력
+
+첫 번째 줄에 수빈이가 있는 위치 N과 동생이 있는 위치 K가 주어진다. N과 K는 정수이다.
+
+## 출력
+
+수빈이가 동생을 찾는 가장 빠른 시간을 출력한다.
+
+## 예제 입력 1
+
+```
+5 17
+```
+
+## 예제 출력 1
+
+```
+4
+```
+
+## 힌트
+
+수빈이가 5-10-9-18-17 순으로 가면 4초만에 동생을 찾을 수 있다.
+
+---
+
+## ☺︎ a/t
+
+### 활용할 자료구조
+
+1. 트리
+  1. 각 연산을 결과로하는 트리를 만든다.
+  2. 동생이 있는 K위치의 노드 Depth가 최단거리이다.
+2. 연결 리스트
+  1. 시간 복잡도 최악 예상
+3. 그래프
+  1. BFS로 연결된 노드 탐색
+  2. K 발견되면 레벨 출력
+
+---
+
+## Snippets
+
+```jsx
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.*;
+
+/***
+ * @Point
+ *
+ * - BFS, 연결 리스트
+ * - K 노드 찾을 때 까지 BFS 수행하고 레벨 출력
+ * @Review
+ * 노드 몇 개 생성 될지 몰라서 방문 배열 ArrayList로 생성
+ * 숫자 커질 수록 방문 여부 체크할 때마다 전체 탐색 해야 함 > 당연히 시간 초과
+ */
+public class Main {
+
+    //방문 배열
+    static boolean[] visit;
+    //n,k
+    static int n, k;
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        //n,k 입력받기
+        String[] nk = br.readLine().split(" ");
+        n = Integer.parseInt(nk[0]);
+        k = Integer.parseInt(nk[1]);
+
+        visit = new boolean[200002];
+        //Call bfs
+        bfs(n);
+    }
+
+    private static void bfs(int Node) {
+        int[] operation = {2, 1, -1};
+
+        Queue<Dis> q = new LinkedList<>();
+
+        q.add(new Dis(Node, 0));
+
+        visit[Node] = true;
+
+        //3 operation
+        //2*x, x+1, x-1
+        //연산결과 방문 체크, 방문 했다면 삽입 안함
+        while (!q.isEmpty()) {
+
+            Dis x = q.poll();
+
+            //노드값,거리, 방문 여부
+            int nowNode = x.getNode();
+            int nowDis = x.getDis();
+
+            //k 찾으면 종료 하고 Distance 리턴
+            if (nowNode == k) {
+                System.out.print(nowDis);
+                return;
+            }
+
+            //방문 했다면 삽입 안함
+            for (int i = 0; i < operation.length; i++) {
+                int newNode = 0;
+
+                //곱, +- 연산 분리
+                if (i == 0) {
+                    newNode = operation[0] * nowNode;
+                } else {
+                    newNode = operation[i] + nowNode;
+                }
+
+                if (newNode < 0 || newNode >= 200002) {
+                    continue;
+                }
+                if (!visit[newNode]) {
+                    visit[newNode] = true;
+                    q.add(new Dis(newNode, nowDis + 1));
+                }
+
+            }
+        }
+    }
+    public static class Dis {
+        private final int node;
+        private final int dis;
+
+        public Dis(int node, int dis) {
+            this.node = node;
+            this.dis = dis;
+        }
+
+        public int getNode() {
+            return node;
+        }
+
+        public int getDis() {
+            return dis;
+        }
+    }
+}
+
+```
+
+---
+
+## 시간 소요한 것
+
+### 1. 방문 배열
+
+1. 인접 노드가 몇 개 생성될지 모르기에 처음에 Dis 클래스에 별도로 visit 변수를 생성하였다.
+2. 그렇게 하니, 인접 노드를 삽입하기 전에 방문 여부를 체크할 수 없었기에 Delete
+
+    ```jsx
+    if (!visit[newNode]) { // 여기서 새로운 노드 방문 여부를 체크할 수 없음
+        visit[newNode] = true;
+        q.add(new Dis(newNode, nowDis + 1));
+    }
+    ```
+
+3. 이후 ArrayList 형식으로 방문 배열 생성하고, `list.contains(newNode)` 로 방문 여부 체크
+  1. 즉, 인접 노드를 ArrayList에 추가함 → **아주 당연히 시간초과**
+    1. 숫자 커질수록 방문 여부 체크할 때마다 **ArrayList**를 탐색해야 함
+4. 원래대로 `int[] visit` → 1차원 배열로 생성하고 배열 길이를 설정
+  1. 수빈 위치 100,000 → 2*x 연산 시 갈 수 있는 위치 Max는 **200,000**
+  2. 처음에 2000001로 설정해서 Out Of Bounds 에러 계속 발생 →
+  3. 문제 다 풀어놓곤 범위 에러 적당히 하자
+  ->  **데이터 최대/최소 범위 확인, Int,  Long 형으로 받을 지 구분, 0이하 음수로 떨어질 경우 구분**
+
+    ```jsx
+    visit = new boolean[200002];
+    ```
+
+    ```jsx
+    if (newNode < 0 || newNode >= 200002) {
+        continue;
+    }
+    ```
+
+
+</details>
+</summary>
+
+---
+
